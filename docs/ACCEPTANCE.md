@@ -96,3 +96,27 @@ The API integration review traced this outcome to the vendor's deliberate exclus
 Workspace evidence: `work/qa-acceptance/capture-suite.log`, `capture-context-unit.log`, `combined-release-suite.log`, and `work/qa-actual-camera/actual-sdk-fake-camera.json`. Fresh deliverable screenshots are in `screenshots/` and show labelled sample results and the capture screen without credentials or task receipts.
 
 Final combined capture release gate: **23/23 browser cases passed in 139.473 seconds**, with no uncaught exceptions in the mocked/functional suite. This result includes the known-method mismatch and capture regressions above. The separately measured actual vendor SDK rejection on Chromium's synthetic device remains a documented environment limitation and is not counted as a passing physical-camera test.
+
+## Evidence workspace release gate
+
+The evidence-workspace focus suite passed **6/6 cases in 37.415 seconds** after the selected-region reading was corrected. API responses and AWS-shaped image URLs in this suite were intercepted locally; the rendered images were valid PNG fixtures. This proves frontend handling of returned evidence, not a new real-provider or accuracy claim, and spent no analysis units.
+
+```sh
+PYTHONPATH=tests SKINWISE_BASE_URL=http://127.0.0.1:5173 python -m unittest -v browser_evidence
+```
+
+Verified behavior:
+
+- A new request explicitly submits the `visible` profile. The UI renders the returned original, pore overlay, cheek overlay and redness mask, with their actual returned URLs and decoded image dimensions.
+- Selecting the left cheek displays its returned 58 score; selecting the nose displays its 53 score; returning to whole face restores the 64 score and whole-face overlay. A missing concern/region image or score has an explicit empty state. Whole-face scores are not substituted into the selected-region reading.
+- A three-part signed task receipt is saved separately and survives reload. Images do not survive as journal data. Explicit image refresh uses GET on the completed task; neither reload nor refresh starts another POST.
+- Expired image bytes and expired task access produce visible fallback/error states. They do not invent detection images, remove the saved numeric record or start a replacement analysis.
+- An older scan can be inspected and reviewed independently of the latest scan. Match/mismatch choices and a note persist after reload and appear in journal export; another scan's review remains untouched.
+- Journal storage and exported JSON contain neither temporary image URLs nor access tokens. Private completed-task receipts remain outside the export. Deletion clears those receipts, and a delayed refresh response cannot restore deleted evidence or observations.
+- Before submission, a 1079-pixel short side is labelled SD / 9 units and a 1080-pixel short side HD / 12 units. This UI boundary test starts no API job; backend contract tests and separately recorded real-provider evidence cover provider execution.
+
+One meaningful interpretation defect was corrected during this gate: the selected regional image initially left the reading heading on the whole-face score. The focused test now checks selected-region and whole-face readings explicitly. An intermediate development-server module reload interrupted one run; its uncaught error remained a failure, followed by a fresh run against frozen source.
+
+Evidence logs: workspace `work/qa-acceptance/evidence-suite.log` and `evidence-base-regression.log`. The earlier 23-case core/capture suite was rerun after the focused evidence tests; its final result follows below.
+
+Evidence-workspace regression result: **23/23 existing core/capture cases passed in 128.787 seconds**, following the focused **6/6 evidence cases**. Both gates asserted no uncaught browser exceptions and made no paid API requests. The evidence workspace therefore has 29 passing focused/regression cases across these two runs; actual provider usefulness and returned visual capability are recorded separately by the integration owner.

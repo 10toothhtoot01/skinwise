@@ -1,6 +1,8 @@
 # Skinwise
 
-A YouCam-powered skincare observation journal. Capture a consistent photo, review returned appearance estimates, choose one routine change to observe, and keep context alongside later check-ins. A separate sample walkthrough uses explicitly synthetic scores.
+A visual evidence workspace for YouCam skin analysis. Choose a visible concern, inspect the actual returned detection image and supported regions, and record whether the model's highlighted area matches your question. The journal keeps that interpretation and routine context. A separate sample walkthrough never invents detection images.
+
+See [API-centered usefulness and real verification](docs/API-USEFULNESS.md).
 
 ## Run locally
 
@@ -13,7 +15,7 @@ cp .dev.vars.example .dev.vars
 npm run dev
 ```
 
-Open the Local URL printed by the server (normally http://127.0.0.1:5173). The account needs active API units; the six-concern standard analysis costs 12 units according to the consulted provider documentation. `GET /api/status` only checks whether a key is configured, not whether it has credits.
+Open the Local URL printed by the server (normally http://127.0.0.1:5173). The account needs active API units; the four-concern visible profile costs12units inHD or9units inSD according to the consulted provider documentation. `GET /api/status` only checks whether a key is configured, not whether it has credits.
 
 The supplied key was configured locally for this build in ignored `.dev.vars` and as a secret on the private Sites deployment. It is not included in source or a downloadable source archive. Other developers supply their own key.
 
