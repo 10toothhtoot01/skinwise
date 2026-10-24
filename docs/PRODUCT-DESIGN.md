@@ -1,5 +1,7 @@
 # Skinwise product and design decision record
 
+Historical initial journal design. The current primary submission entry is the owned-kit planner; see OWN-KIT-PLANNER.md for its current product model and acceptance. The journal criteria below apply to the supporting skin workspace.
+
 Skills applied: Anthropic frontend-design (intentional tokens, grounded subject matter, plan/review/build/critique); Matt Pocock domain-modeling (precise domain boundaries and edge scenarios); Vercel web-design-guidelines (interaction/accessibility review). Fetched SKILL.md documents and hashes are recorded in product-design-provenance.json. to-spec was researched but not invoked because its issue-tracker publishing workflow is outside this delegated task.
 
 ## Product model

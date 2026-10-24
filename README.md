@@ -1,8 +1,8 @@
-# Skinwise
+# Skinwise — Own-kit Look Lab
 
-A visual evidence workspace for YouCam skin analysis. Choose a visible concern, inspect the actual returned detection image and supported regions, and record whether the model's highlighted area matches your question. The journal keeps that interpretation and routine context. A separate sample walkthrough never invents detection images.
+The primary product is an experimental owned-kit makeup planner at `/planner`: enter products you already own, specify time/product/required/excluded constraints, inspect feasible combinations and optional actual YouCam previews, then keep your own decision. The software supplies the constraint solver, conflict explanations, varied shortlist, preference graph and recovery/decision trail. See [planner scope and proof](docs/OWN-KIT-PLANNER.md).
 
-See [API-centered usefulness and real verification](docs/API-USEFULNESS.md).
+The supporting workspace at `/` inspects actual YouCam skin detection images and returned regions, with a journal for personal context. Skin scores do not select makeup, establish health or prove product effectiveness. See [skin API usefulness](docs/API-USEFULNESS.md).
 
 ## Run locally
 
@@ -15,7 +15,7 @@ cp .dev.vars.example .dev.vars
 npm run dev
 ```
 
-Open the Local URL printed by the server (normally http://127.0.0.1:5173). The account needs active API units; the four-concern visible profile costs12units inHD or9units inSD according to the consulted provider documentation. `GET /api/status` only checks whether a key is configured, not whether it has credits.
+Open `/planner` on the Local URL printed by the server (normally http://127.0.0.1:5173/planner). The solver and clearly fictional kit walkthrough need no API key or units. A real optional makeup preview needs a server key with active units and costs1unit per explicit start according to the consulted reference. The separate skin workspace at `/` costs12units inHD or9units inSD for its four-concern visible profile. `GET /api/status` only checks whether a key is configured, not whether it has credits.
 
 The supplied key was configured locally for this build in ignored `.dev.vars` and as a secret on the private Sites deployment. It is not included in source or a downloadable source archive. Other developers supply their own key.
 
@@ -27,11 +27,14 @@ Optional YouCam guided capture checks face position, angle, lighting and resolut
 
 ## What to try
 
-- Open the sample walkthrough to explore results and journal behavior without API use.
-- For live analysis, use the guided camera or a consenting adult's clear, front-facing JPEG/PNG. Record the optional capture setup so later differences in conditions remain visible. The face should fill most of the image, with no filters and consistent lighting.
-- Read the processing notice, consent, and submit once. The app polls the existing task; do not restart a pending paid job.
-- Save one change and write a check-in. Reload to confirm browser persistence.
-- Review matching metrics from the same source, with capture-context warnings and no improvement verdict. Export your journal or delete it with confirmation.
+1. Open `/planner` and try the clearly fictional kit. Paid previews are disabled for this walkthrough.
+2. Require lip color and reduce the time limit below its entered estimate. Inspect the specific infeasibility explanation. Try a required/excluded conflict, then restore consistent limits.
+3. Inspect the feasible count and structurally varied shortlist. Export an unresolved plan; no paid API call is needed.
+4. For an actual preview, clear the fictional session, enter your owned products, prepare a permitted adult portrait and explicitly consent to processing/cost. All options start from the same prepared original.
+5. Inspect actual output for artifacts, compare available options, record a preference/tie/rejection and choose a plan explicitly. Digital colors and time estimates are not physical guarantees.
+6. Keep private task-recovery files separate from ordinary shareable plan exports. Check an existing task with GET rather than start another paid job. Recovery does not extend receipt expiry.
+
+The supporting `/` skin workspace has its own labelled sample, optional guided capture, real detection images and journal. It preserves source/capture context and describes score differences without a product-effectiveness verdict. It does not supply makeup recommendations.
 
 ## Data and limits
 
@@ -49,9 +52,17 @@ The current hosting target is owner-private. Do not expose the paid analysis end
 
 ```bash
 npx tsc --noEmit
-node --experimental-strip-types --test tests/api.test.mjs tests/capture-context.test.mjs
+node --experimental-strip-types --test tests/api.test.mjs tests/capture-context.test.mjs tests/look-planner.test.mjs
 npm run build
 ```
+
+For planner/recovery browser checks after installing Python Playwright and Chromium:
+
+```bash
+PYTHONPATH=tests python -m unittest -v browser_planner browser_planner_recovery
+```
+
+These tests intercept provider calls and do not spend API units. Planner previews cost1unit per explicit start according to the consulted provider reference; the local solver spends none.
 
 Exact tested commands, browser checks and their limits are recorded in [acceptance evidence](docs/ACCEPTANCE.md). Development browser tests require Python Playwright and Chromium.
 

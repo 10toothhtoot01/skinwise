@@ -1,38 +1,40 @@
-# Skinwise
+# Skinwise — Own-kit Look Lab
 
-**Tagline:** One change. A clearer skincare story.
+**Tagline:** Use what you own. Decide what to try.
 
-## Problem
+**Primary entry:** `/planner` · **Platform:** browser application, desktop Chromium verified; mobile layout exercised at390px.
 
-People often assess a skincare purchase with memory and photos taken under different conditions. Simultaneous routine changes and missing context make those observations difficult to interpret. Skinwise gives a person a structured way to record what they changed, how their skin felt, and what a comparable image analysis estimated.
+## Inspiration
+
+A virtual makeup gallery can show many attractive results without answering the practical question before an occasion: “What can I plan with the products I already have and the time I have left?” We put that decision before rendering. The person supplies their kit and limits; our software determines feasible combinations; YouCam supplies illustrative previews; the person chooses what to try or opts for no added makeup.
 
 ## What it does
 
-Skinwise pairs YouCam skin appearance analysis with a one-change journal. The user prepares a photo, consents to processing, receives appearance scores, selects a single routine change to observe, and logs check-ins with notes and comfort. History views keep source and capture provenance visible and show matching metrics descriptively, with warnings when capture context is unknown or changed. Export and deletion controls give the person direct control of browser journal data.
+Enter up to nine owned products across matte lip color, blush and single-color eye shadow. Set a time estimate, a maximum product count, and required or excluded steps. The solver enumerates the bounded combination space, enforces those constraints and explains when nothing fits. It shows up to three structurally different feasible alternatives, starting with the quickest by the user's estimates. This is a variety heuristic, not an attractiveness score.
 
-## YouCam integration
+Optional YouCam previews use the same prepared original for every option. The user can compare available images, prefer either, record a tie or reject both. A preference graph preserves conflicts rather than forcing a winner. The user explicitly selects a plan and exports the kit, constraints, digital recipe and decision trail. Choosing no added makeup is an explicit opt-out, not a claim that an unmet required step was satisfied.
 
-The server adapter validates an image, creates a YouCam upload, submits a Skin Analysis task, and lets the browser poll the asynchronous job. It surfaces actual provider failures and extracts documented UI scores. API keys are server-only. The app includes a separate sample walkthrough so its journal interactions can be explored without representing synthetic fixtures as live analysis.
+## How we built it
 
-## Value beyond an API call
+React and TypeScript run on Vinext and Cloudflare Workers. The server recomputes recipe feasibility before calling YouCam Makeup VTO. It uploads the image through the File API, starts the asynchronous makeup task and provides a signed receipt for GET-only recovery. Effects explicitly set skin smoothing and lip morphology to zero. Results come from the provider; no generated success is substituted after an error.
 
-The product preserves context after a result: a deliberate change, context recorded over time, and a comparison with limitations explained. It does not diagnose skin conditions, prescribe treatment, sell a guaranteed result, or infer that an observed score change proves product effectiveness.
+Our contribution is the constraint solver, infeasibility explanations, bounded comparison design, preference graph, original-photo ownership checks and decision export. Browser storage failures are visible; unreadable sessions are preserved; separate private backup/restore files retain task access. Ordinary plan exports exclude photos, result URLs and access receipts. API credentials remain on the server.
 
-## Stack
+A separate skin evidence workspace at `/` can inspect real YouCam skin detection images and returned regional scores. It does not determine makeup suitability, health or treatment. It is a supporting capability, not a prerequisite for the planner.
 
-React, TypeScript, Vinext, Cloudflare Workers runtime, browser-local journal persistence, YouCam REST APIs. Development and reviews follow vetted GitHub skill methods recorded in BUILD-DECISIONS.md and accompanying provenance.
+## What we verified
 
-## Honest completion checklist
+Four real YouCam jobs completed on a labelled AI-generated adult portrait: two skin-analysis jobs and two makeup configurations, including the complete three-effect recipe. The most recent recovery release passed12planner/recovery browser cases; earlier unchanged core flows have31additional browser cases and19Node contract/context/solver tests. TypeScript, scoped changed-component lint and production builds passed. Deployed checks verified real existing-task retrieval and preserved invalid browser data. Tests distinguish mocked responses, fictional kits and actual provider output.
 
-- [ ] Live API successfully exercised with a consenting adult photo; record evidence without retaining photo/key.
-- [ ] Final functional screenshots attached.
-- [ ] Source repository accessible to judges with license and reproducible setup.
-- [ ] Published demo video URL (1–3 minutes).
-- [ ] Final deployed app URL and access instructions for judges.
-- [ ] Confirm all current eligibility and submission rules on Devpost.
+## What remains uncertain
 
-These boxes describe remaining submission obligations; this draft is not evidence they are complete.
+The prototype uses approximate user-entered RGB colors, fixed digital effect settings and additive user-entered time estimates. It does not recognize SKUs or guarantee physical shade, application time, wear, comfort or outcome. No intended user has yet tested it; no benefit or savings claim has been established. A prepared pilot compares it with an ordinary swatch/product board and observes physical follow-through. Physical-phone camera coverage and exact-engine skin validity remain unverified.
 
-## Accuracy boundary
+## Links and submission status
 
-The shipped prototype is not a validated product-effectiveness evaluator. We separate software verification from model validity, preserve unknown model-build identity, avoid cross-metric clinical priorities, and explain that score changes may be photographic noise. Guided capture is designed to reduce acquisition problems; real-hardware and subgroup validation remain future work. See ACCURACY-EVIDENCE.md and CAPTURE-RELIABILITY.md.
+- Working private entry: https://skinwise-journal.bonnypuppy8192.chatgpt.site/planner
+- Source: complete MIT-licensed source archive prepared; **judge-accessible repository URL not yet supplied**.
+- Primary recorded demo: `outputs/skinwise-planner-demo.mp4`,82.6seconds, actual UI with synthetic portrait / fictional kit / actual completed YouCam output replay labels. **Public video URL not yet supplied**.
+- Screenshots, captions and final access checklist: `outputs/submission/`.
+
+This is prepared submission text, not a claim that a Devpost entry, public upload, judge access, eligibility or final submission has been completed. The current [official rules](https://youcam-api-skin-ai-ecommerce.devpost.com/rules) must govern final entry.

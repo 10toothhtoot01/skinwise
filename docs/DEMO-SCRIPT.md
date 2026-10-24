@@ -1,25 +1,29 @@
-# Demo recording plan (target: 2 minutes 30 seconds)
+# Own-kit Look Lab demo and recording instructions
 
-Record the working app at desktop width, then briefly show the mobile view. Use a consenting adult's photo for the live analysis. Never show a secret key, account dashboard, or personal journal export on screen. The sample walkthrough is labelled synthetic and must be identified as such in the recording.
+## Current primary recording
 
-## Narrative and shots
+Use `outputs/skinwise-planner-demo.mp4`:82.6seconds, silent H264,1440×1000,25fps. Transcript and WebVTT accompany it. It records the working browser interface, a fictional three-item kit and a labelled synthetic portrait, followed by GET retrieval of a completed real three-effect YouCam makeup task. It made one existing-task GET, zero POST attempts and had no uncaught browser errors. The replay is explicitly labelled; do not describe it as new generation or a real participant outcome.
 
-**0:00–0:20 — The purchase moment.** “A new skincare product is easy to buy and hard to evaluate. When you change three things at once, a better-looking selfie cannot tell you which change mattered. Skinwise helps you observe one change before making the next decision.” Show the overview.
+The recording shows the central contribution: constraint solving and conflict explanations before rendering, feasible alternatives, provider output, explicit comparison and a chosen-plan export. The later private recovery-file UI is verified separately and is not shown in this earlier recording.
 
-**0:20–0:50 — Capture and analysis.** Show photo guidance, consent, and real upload. “We integrate YouCam Skin Analysis using its upload and asynchronous task APIs. The secret stays on the server. The app waits for the provider, then displays the actual returned scores.” If editing out the wait, label the cut as elapsed processing time. If live credentials remain unavailable, say this clearly and show only the labelled sample; do not claim a successful integration test.
+## Shot sequence for a refreshed recording
 
-**0:50–1:20 — One change.** Open the result and choose one routine observation. “The score is an appearance estimate. This is a journal, not a diagnosis. You choose what to track, keep other variables steady, and record comfort alongside the image score.” Save the plan.
+| Time | Show | Message to convey |
+|---|---|---|
+|0:00–0:12|The actual occasion and existing-kit fields|“Choose what to try from what you own, within your own limits.”|
+|0:12–0:30|A time limit that makes required lip color impossible, then a required/excluded conflict|“Our software checks the combination space and explains why no plan fits.”|
+|0:30–0:45|Consistent limits and the feasible shortlist|“Only owned products and permitted steps remain. The shortlist adds structural variety, not a beauty ranking.”|
+|0:45–1:10|Prepared original beside actual YouCam makeup output|“YouCam supplies the visual preview. Each option starts from the same original; smoothing and morphology are explicitly requested at zero.”|
+|1:10–1:30|Prefer, tie and reject controls; explicit selection|“Your choices are the reference. We preserve conflicts and do not force an inferred ideal look.”|
+|1:30–1:50|Ordinary plan export, private recovery controls and mobile layout|“Keep a plan and decision trail. Private task recovery is separate from a shareable export.”|
+|1:50–2:00|Scope and next experiment|“Digital settings and time estimates do not guarantee a physical result. Real-user usefulness remains to be tested.”|
 
-**1:20–1:50 — Check-in.** Enter a concrete note and comfort rating. Show it persists after refresh. “Your notes add context a photo cannot measure. Photos are not stored by this app. Journal data lives in this browser.”
+Use either a clearly labelled completed-task replay or a newly consented actual job with its cost shown. Preserve the same source image and visible disclosures. Never show an API key, private recovery contents, signed URL, console account dashboard or access token. Do not invent a live result to shorten a wait. Record desktop browser footage as the verified target platform; mobile emulation is layout evidence, not physical-phone capture proof.
 
-**1:50–2:15 — Comparison.** Show same-source comparable results if available. “We compare matching metrics from the same source, with a reminder about lighting and camera variation. A score change does not establish that a product caused it.” Do not present synthetic follow-up as actual elapsed user progress.
+## Other recordings
 
-**2:15–2:30 — Ownership and close.** Show export, mobile view, and delete confirmation. “The useful outcome is a clearer next decision: one change, recorded context, and fewer assumptions.”
+`skinwise-api-demo.mp4` demonstrates the separate real skin-evidence inspector. `skinwise-demo.mp4` is the earlier fictional journal walkthrough. Neither is the primary planner submission video. Do not concatenate them into an unfocused catalogue or claim the skin scores select a makeup look.
 
-## Before upload to video host
+## Publication status
 
-- Replace this plan's conditional language with verified behavior from the recorded build.
-- Ensure final video is between 1 and 3 minutes and includes actual device footage.
-- Show the YouCam API used and distinguish any sample data.
-- Use only original narration, application UI, and permitted images; no copyrighted music required.
-- Upload and publish to an allowed host, then add the final URL to the hackathon submission.
+The primary local file meets the requested1–3minute length. Public hosting, a final video URL and judge access remain incomplete. Prepare the chosen upload and access configuration for owner review before changing existing private sharing. See `outputs/submission/READINESS.md` for explicit obligations. The [official rules](https://youcam-api-skin-ai-ecommerce.devpost.com/rules) govern the permitted host and testing access.
