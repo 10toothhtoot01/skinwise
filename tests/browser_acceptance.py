@@ -120,6 +120,7 @@ class Acceptance(unittest.TestCase):
         scans = [analysis('demo', 'demo', [('moisture','Hydration',99)]),
                  analysis('live1','youcam',[('moisture','Hydration',40),('texture','Texture',50)]),
                  analysis('live2','youcam',[('moisture','Hydration',45),('redness','Redness',60)])]
+        for scan in scans[1:]:scan['method']={'provider':'youcam','endpointVersion':'2.1','tier':'SD','scoreKind':'ui_score','modelVersion':None}
         self.open(json.dumps(journal(scans)))
         self.click_nav('Progress')
         expect(self.page.get_by_text('2 live checks')).to_be_visible()
@@ -339,6 +340,23 @@ class Acceptance(unittest.TestCase):
         self.assertEqual(record['method'], self.stored()['analyses'][0]['method'])
         self.assert_clean()
 
+
+    def test_missing_live_method_withholds_numeric_delta(self):
+        method={'provider':'youcam','endpointVersion':'2.1','tier':'HD','scoreKind':'ui_score','modelVersion':None}
+        self.open()
+        for before,after in [(None,method),(method,None),(None,None)]:
+            first=analysis('unknown-first','youcam',[('pore','Pore appearance',50)])
+            last=analysis('unknown-last','youcam',[('pore','Pore appearance',75)])
+            if before is not None:first['method']=before
+            if after is not None:last['method']=after
+            self.page.evaluate('([key,value])=>localStorage.setItem(key,JSON.stringify(value))',[KEY,journal([first,last])])
+            self.page.reload();self.page.wait_for_load_state('networkidle');self.click_nav('Progress')
+            expect(self.page.locator('.comparison-chart .inline-note').first).to_contain_text('Analysis method metadata is missing')
+            expect(self.page.locator('.comparison-row')).to_contain_text('Not comparable')
+            self.assertNotIn('+25',self.page.locator('.comparison-row').inner_text())
+            self.assertEqual([50,75],[a['metrics'][0]['score'] for a in self.stored()['analyses']])
+        self.assertEqual([],self.analysis_requests)
+        self.assert_clean()
 
     def test_known_method_change_withholds_numeric_delta(self):
         first=analysis('method-first','youcam',[('moisture','Moisture appearance',60)])

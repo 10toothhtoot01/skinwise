@@ -120,3 +120,10 @@ One meaningful interpretation defect was corrected during this gate: the selecte
 Evidence logs: workspace `work/qa-acceptance/evidence-suite.log` and `evidence-base-regression.log`. The earlier 23-case core/capture suite was rerun after the focused evidence tests; its final result follows below.
 
 Evidence-workspace regression result: **23/23 existing core/capture cases passed in 128.787 seconds**, following the focused **6/6 evidence cases**. Both gates asserted no uncaught browser exceptions and made no paid API requests. The evidence workspace therefore has 29 passing focused/regression cases across these two runs; actual provider usefulness and returned visual capability are recorded separately by the integration owner.
+
+
+## Accuracy loop: incomplete evidence and unknown method metadata
+
+October 24: seven evidence-workspace cases passed in 40.219 seconds; 24 core/capture cases passed in 132.050 seconds (31 browser cases total). The new missing-score regional-image test additionally runs at a 390-pixel mobile viewport. Thirteen Node contract/context tests, TypeScript, scoped evidence-component lint, and production build pass. All browser analysis responses in these regression gates are mocked; no additional provider units were consumed.
+
+The new tests first reproduced two defects: image-only returned regions were inaccessible, and unknown historical analysis metadata permitted numerical comparisons. Both are fixed, with independent review. Scores and images are preserved independently; missing scores remain absent; missing-method comparisons retain observations and withhold deltas. See ACCURACY-LOOP.md for counterexamples, methods, provenance and next validation gates. These checks establish software behavior, not clinical accuracy or real-person usefulness.

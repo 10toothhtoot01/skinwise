@@ -113,6 +113,29 @@ class EvidenceAcceptance(unittest.TestCase):
         self.assertEqual(['GET'],calls)
         self.assert_private_export(self.stored());self.assert_clean()
 
+    def test_image_only_region_remains_inspectable_without_invented_score(self):
+        self.page.set_viewport_size({'width':390,'height':844})
+        self.mock_images();scan=result()
+        scan['regions']=[{'key':'pore','label':'Pore appearance','region':'nose','score':53}]
+        images=visuals()
+        # Cheek has a real returned image but no valid UI score. Whole has an image only.
+        scan['metrics']=[m for m in scan['metrics'] if m['key']!='pore']
+        self.page.route('**/api/analyze*',lambda route:route.fulfill(json={'status':'success','result':scan,'visuals':images}))
+        self.seed([scan],{'evidence-task':{'taskId':'evidence-task','token':TOKEN}})
+        workspace=self.inspect()
+        workspace.get_by_role('button',name='Refresh detection images').click()
+        expect(workspace.get_by_role('img',name='YouCam overlay for Pore appearance, Whole')).to_have_attribute('src',AWS+'one-pore.png')
+        group=workspace.get_by_role('group',name='Returned facial regions')
+        group.get_by_role('button',name=re.compile('^Left cheek')).click()
+        expect(workspace.get_by_role('img',name='YouCam overlay for Pore appearance, Left cheek')).to_have_attribute('src',AWS+'one-cheek.png')
+        expect(workspace.get_by_text('No score was returned for this concern and region.',exact=True)).to_be_visible()
+        group.get_by_role('button',name=re.compile('^Nose')).click()
+        expect(workspace.get_by_text('Nose Pore appearance: 53/100',exact=True)).to_be_visible()
+        group.get_by_role('button',name=re.compile('^Whole face')).click()
+        expect(workspace.get_by_role('img',name='YouCam overlay for Pore appearance, Whole')).to_have_attribute('src',AWS+'one-pore.png')
+        expect(workspace.get_by_text('No score was returned for this concern and region.',exact=True)).to_be_visible()
+        self.assertEqual(1,len(self.analysis_requests));self.assert_clean()
+
     def test_expired_and_missing_images_do_not_invent_detection(self):
         self.mock_images(expired=True);calls=[]
         def handle(route):

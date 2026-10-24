@@ -145,6 +145,7 @@ class CaptureAcceptance(unittest.TestCase):
         for before,after,message in conditions:
             first=base.analysis('first','youcam',[('moisture','Moisture appearance',60)])
             last=base.analysis('last','youcam',[('moisture','Moisture appearance',64)])
+            first['method']=last['method']={'provider':'youcam','endpointVersion':'2.1','tier':'SD','scoreKind':'ui_score','modelVersion':None}
             if before is not None:first['capture']=before
             if after is not None:last['capture']=after
             self.page.evaluate('([key,value])=>localStorage.setItem(key,JSON.stringify(value))',[base.KEY,base.journal([first,last])])

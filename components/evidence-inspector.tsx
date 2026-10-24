@@ -12,13 +12,19 @@ export function EvidenceInspector({source,metrics,regions=[],visuals,focus,onFoc
   const entries=regions.filter(r=>r.key===focus);
   const image=visuals?.items.find(v=>v.key===focus&&v.region===region);
   const focused=metrics.find(m=>m.key===focus || focus==='pore'&&m.key==='pores');
+  // Images and scores are independent provider outputs; either can make a region inspectable.
+  const returnedRegions=[...new Set([
+    ...(focused?['whole']:[]),
+    ...entries.map(entry=>entry.region),
+    ...(visuals?.items.filter(item=>item.key===focus).map(item=>item.region)||[]),
+  ])];
   const selectedScore=region==='whole'?focused?.score:entries.find(entry=>entry.region===region)?.score;
   const question=focusOptions.find(f=>f.key===focus)!.question;
   return <section className="evidence-workspace" aria-label="YouCam visual evidence">
     <div className="section-heading"><div><h2>Inspect what YouCam marked.</h2><p>Start with your question. Inspect the returned image before interpreting a score.</p></div><span className="pill">{source==='demo'?'Fictional walkthrough':'Actual provider output'}</span></div>
     <div className="focus-options" role="group" aria-label="Question to inspect">{focusOptions.map(option=><button key={option.key} type="button" aria-pressed={focus===option.key} onClick={()=>onFocus(option.key)}>{option.label}</button>)}</div>
     <h3 className="evidence-question">{question}</h3>
-    {entries.length>0&&<div className="region-options" role="group" aria-label="Returned facial regions">{focused&&<button aria-pressed={region==="whole"} onClick={()=>{selectRegion("whole");}}>Whole face <span>{focused.score}/100</span></button>}{entries.map(entry=><button key={entry.region} aria-pressed={region===entry.region} onClick={()=>{selectRegion(entry.region);}}>{regionName(entry.region)} <span>{entry.score}/100</span></button>)}</div>}
+    {returnedRegions.length>0&&<div className="region-options" role="group" aria-label="Returned facial regions">{returnedRegions.map(value=>{const score=value==='whole'?focused?.score:entries.find(entry=>entry.region===value)?.score;return <button key={value} aria-pressed={region===value} onClick={()=>selectRegion(value)}>{value==='whole'?'Whole face':regionName(value)} <span>{score!==undefined?`${score}/100`:'No score returned'}</span></button>;})}</div>}
     <div className="evidence-zoom"><label htmlFor="evidence-zoom">Inspect image detail</label><input id="evidence-zoom" type="range" min="1" max="3" step="0.25" value={zoom} onChange={e=>setZoom(Number(e.target.value))}/><span>{zoom}× · scroll either image to inspect</span></div><div className="evidence-images">
       <figure><ImageTile key={visuals?.originalUrl||'no-original'} url={visuals?.originalUrl} zoom={zoom} alt="Provider-returned input image used for this scan" empty={source==='demo'?'Sample records contain no real portrait.':'The provider input image is not loaded.'}/><figcaption>Reference image returned by YouCam</figcaption></figure>
       <figure><ImageTile key={image?.url||'no-detection'} url={image?.url} zoom={zoom} alt={`YouCam ${image?.kind||'image'} for ${focusOptions.find(f=>f.key===focus)!.label}, ${regionName(region)}`} empty={source==='demo'?'No detection image is invented for sample data.':'No detection image is loaded for this concern and region.'}/><figcaption>{image?.kind==='overlay'?'Provider detection overlay':'Provider detection mask'} · {regionName(region)}</figcaption></figure>
