@@ -154,3 +154,16 @@ PYTHONPATH=tests python -m unittest -v browser_planner browser_planner_recovery
 ```
 
 This release passed7planner cases in47.635seconds and7recovery cases in44.191seconds; the two focused390px cases passed12.857seconds.19Node tests, TypeScript, scoped planner lint and the official production build passed. Earlier31unchanged core/capture/evidence cases are reused:45browser cases across suites, not a claim that all45ran together. Source identity is recorded in the delivery package and workspace progress ledger.
+
+
+## Free all-feasible decision loop — October25
+
+Independent review found a four-product kit had11feasible recipes but only3accessible, and every product choice required a paid loaded image. The original missing-catalog regression failed. The correction exposes every feasible recipe in a free text catalog, allows explicit constraints-only selection/export and free no-added-makeup, and opens one focused optional card alongside the3starters. No API request occurs until a separate explicit start/check. Selection basis distinguishes `constraints-only`, `loaded-preview`, `original`, and legacy `not-recorded`.
+
+Four new mocked-browser cases passed38.854seconds: omitted three-step recipe selection/export/reload with zero requests; exact focused recipe submission and GET-only return; expired image retaining a text-based choice; and100comparison append guard with export/reset. Independent edge checks verified first/replacement portraits retain constraints-only choice, old sessions default newfieldsnull, and rejected catalog choices stay guarded. At390px, all63balanced-kit recipes were individually selectable with zeroAPIcalls, no overflow and at most4recipe cards. This is emulation, not physical-phone proof.
+
+The14nearest planner/recovery regression cases passed84.920seconds after source was frozen. A prior invocation overlapped hot-module replacement and lost a mocked in-flight request; the stable rerun resolved that infrastructure ambiguity.19Node tests,tsc,scopedplannerlint,gitdiffcheck and officialproductionbuild passed.49browser cases across suites (18current planner/recovery/decision and31earlier unchanged core/capture/evidence), not a claim of one49case run. No real-person or new paidprovider test was used.
+
+```sh
+PYTHONPATH=tests python -m unittest -v browser_planner browser_planner_recovery browser_planner_decision
+```

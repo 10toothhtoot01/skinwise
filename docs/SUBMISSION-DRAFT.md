@@ -10,9 +10,9 @@ A virtual makeup gallery can show many attractive results without answering the 
 
 ## What it does
 
-Enter up to nine owned products across matte lip color, blush and single-color eye shadow. Set a time estimate, a maximum product count, and required or excluded steps. The solver enumerates the bounded combination space, enforces those constraints and explains when nothing fits. It shows up to three structurally different feasible alternatives, starting with the quickest by the user's estimates. This is a variety heuristic, not an attractiveness score.
+Enter up to nine owned products across matte lip color, blush and single-color eye shadow. Set a time estimate, a maximum product count, and required or excluded steps. The solver enumerates the bounded combination space, enforces those constraints and explains when nothing fits. Three starting alternatives favor speed and structural variety; an expandable catalog exposes every feasible combination. Any can be chosen and exported for free without a photo or API call. The starters are a variety heuristic, not an attractiveness score.
 
-Optional YouCam previews use the same prepared original for every option. The user can compare available images, prefer either, record a tie or reject both. A preference graph preserves conflicts rather than forcing a winner. The user explicitly selects a plan and exports the kit, constraints, digital recipe and decision trail. Choosing no added makeup is an explicit opt-out, not a claim that an unmet required step was satisfied.
+Optional YouCam previews use the same prepared original for every option. The user can compare available images, prefer either, record a tie or reject both. A preference graph preserves conflicts rather than forcing a winner. The user explicitly selects a plan and exports the kit, constraints, digital recipe, decision trail and selection basis: entered constraints, a loaded illustrative preview, or no added makeup. Any feasible recipe can open one focused optional preview without changing the kit or losing earlier decisions. Choosing no added makeup is an explicit opt-out, not a claim that an unmet required step was satisfied.
 
 ## How we built it
 
@@ -24,7 +24,7 @@ A separate skin evidence workspace at `/` can inspect real YouCam skin detection
 
 ## What we verified
 
-Four real YouCam jobs completed on a labelled AI-generated adult portrait: two skin-analysis jobs and two makeup configurations, including the complete three-effect recipe. The most recent reliability release passed14planner/recovery browser cases; earlier unchanged core flows have31additional browser cases and19Node contract/context/solver tests. TypeScript, scoped changed-component lint and production builds passed. Deployed checks verified real existing-task retrieval and preserved invalid browser data. An independent subset oracle matched69,120constraint cases across six fixed kits. Tests distinguish mocked responses, fictional kits and actual provider output.
+Four real YouCam jobs completed on a labelled AI-generated adult portrait: two skin-analysis jobs and two makeup configurations, including the complete three-effect recipe. The most recent core-decision release passed18planner/recovery/decision browser cases; earlier unchanged core flows have31additional browser cases and19Node contract/context/solver tests. TypeScript, scoped changed-component lint and production builds passed. Deployed checks verified real existing-task retrieval and preserved invalid browser data. An independent subset oracle matched69,120constraint cases across six fixed kits. Tests distinguish mocked responses, fictional kits and actual provider output.
 
 ## What remains uncertain
 
@@ -34,7 +34,7 @@ The prototype uses approximate user-entered RGB colors, fixed digital effect set
 
 - Working private entry: https://skinwise-journal.bonnypuppy8192.chatgpt.site/planner
 - Source: complete MIT-licensed source archive prepared; **judge-accessible repository URL not yet supplied**.
-- Primary recorded demo: `outputs/skinwise-planner-demo.mp4`,82.6seconds, actual UI with synthetic portrait / fictional kit / actual completed YouCam output replay labels. **Public video URL not yet supplied**.
+- Primary recorded demo: `outputs/skinwise-planner-demo.mp4`,106.28seconds, actual UI with synthetic portrait / fictional kit / actual completed YouCam output replay labels. **Public video URL not yet supplied**.
 - Screenshots, captions and final access checklist: `outputs/submission/`.
 
 This is prepared submission text, not a claim that a Devpost entry, public upload, judge access, eligibility or final submission has been completed. The current [official rules](https://youcam-api-skin-ai-ecommerce.devpost.com/rules) must govern final entry.

@@ -2,9 +2,9 @@
 
 ## Current primary recording
 
-Use `outputs/skinwise-planner-demo.mp4`:82.6seconds, silent H264,1440×1000,25fps. Transcript and WebVTT accompany it. It records the working browser interface, a fictional three-item kit and a labelled synthetic portrait, followed by GET retrieval of a completed real three-effect YouCam makeup task. It made one existing-task GET, zero POST attempts and had no uncaught browser errors. The replay is explicitly labelled; do not describe it as new generation or a real participant outcome.
+Use `outputs/skinwise-planner-demo.mp4`:106.28seconds, silent H264,1440×1000,25fps. Transcript and WebVTT accompany it. It records the working browser interface, a fictional three-item kit and a labelled synthetic portrait, followed by GET retrieval of a completed real three-effect YouCam makeup task. It made one existing-task GET, zero POST attempts and had no uncaught browser errors. The replay is explicitly labelled; do not describe it as new generation or a real participant outcome.
 
-The recording shows the central contribution: constraint solving and conflict explanations before rendering, feasible alternatives, provider output, explicit comparison and a chosen-plan export. The later private recovery-file UI is verified separately and is not shown in this earlier recording.
+The recording shows constraint solving and conflict explanations, the full feasible catalog, free selection and exact export of a combination absent from the three starter cards, then optional actual provider output and a separately recorded loaded-preview choice. The free export occurs before any API request. Private recovery is verified separately.
 
 ## Shot sequence for a refreshed recording
 
@@ -12,7 +12,7 @@ The recording shows the central contribution: constraint solving and conflict ex
 |---|---|---|
 |0:00–0:12|The actual occasion and existing-kit fields|“Choose what to try from what you own, within your own limits.”|
 |0:12–0:30|A time limit that makes required lip color impossible, then a required/excluded conflict|“Our software checks the combination space and explains why no plan fits.”|
-|0:30–0:45|Consistent limits and the feasible shortlist|“Only owned products and permitted steps remain. The shortlist adds structural variety, not a beauty ranking.”|
+|0:30–0:55|Full feasible catalog, free off-shortlist choice and exact export|“Every permitted combination is available. Keep one without a photo or API request; the choice basis stays explicit.”|
 |0:45–1:10|Prepared original beside actual YouCam makeup output|“YouCam supplies the visual preview. Each option starts from the same original; smoothing and morphology are explicitly requested at zero.”|
 |1:10–1:30|Prefer, tie and reject controls; explicit selection|“Your choices are the reference. We preserve conflicts and do not force an inferred ideal look.”|
 |1:30–1:50|Ordinary plan export, private recovery controls and mobile layout|“Keep a plan and decision trail. Private task recovery is separate from a shareable export.”|

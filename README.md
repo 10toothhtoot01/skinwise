@@ -29,8 +29,8 @@ Optional YouCam guided capture checks face position, angle, lighting and resolut
 
 1. Open `/planner` and try the clearly fictional kit. Paid previews are disabled for this walkthrough.
 2. Require lip color and reduce the time limit below its entered estimate. Inspect the specific infeasibility explanation. Try a required/excluded conflict, then restore consistent limits.
-3. Inspect the feasible count and structurally varied shortlist. Export an unresolved plan; no paid API call is needed.
-4. For an actual preview, clear the fictional session, enter your owned products, prepare a permitted adult portrait and explicitly consent to processing/cost. All options start from the same prepared original.
+3. Open the catalog of every feasible combination. Choose one without a preview, or choose no added makeup, and export the exact plan for free. The export records the basis of your decision.
+4. For an optional visual preview, open any combination’s preview card. This makes no API request. To render, clear the fictional session, enter your owned products, prepare a permitted adult portrait and explicitly consent to processing/cost. All options start from the same prepared original.
 5. Inspect actual output for artifacts, compare available options, record a preference/tie/rejection and choose a plan explicitly. Digital colors and time estimates are not physical guarantees.
 6. Keep private task-recovery files separate from ordinary shareable plan exports. Check an existing task with GET rather than start another paid job. Recovery does not extend receipt expiry.
 
@@ -61,7 +61,7 @@ For the independent69,120case bounded solver audit, run `node --experimental-str
 For planner/recovery browser checks after installing Python Playwright and Chromium:
 
 ```bash
-PYTHONPATH=tests python -m unittest -v browser_planner browser_planner_recovery
+PYTHONPATH=tests python -m unittest -v browser_planner browser_planner_recovery browser_planner_decision
 ```
 
 These tests intercept provider calls and do not spend API units. Planner previews cost1unit per explicit start according to the consulted provider reference; the local solver spends none.
