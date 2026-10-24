@@ -1,5 +1,7 @@
 # Accuracy and usefulness evidence audit
 
+Scope: the supporting skin-analysis workspace. This audit predates the own-kit planner and does not validate makeup rendering, physical shades or the primary planner’s consumer benefit. See [current promises and proof](PROMISES-AND-PROOF.md) for the complete product boundary.
+
 Reviewed October 24, 2026. No paid API calls were made for this audit. The previous synthetic-portrait run proves the network workflow only.
 
 ## Decision

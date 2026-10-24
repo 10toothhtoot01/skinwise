@@ -1,4 +1,6 @@
-# API-centered user value
+# Supporting skin-workspace API value
+
+This document describes the separate skin evidence workflow at `/`, including its dated HD integration test. The primary `/planner` job and present promises are described in [OWN-KIT-PLANNER.md](OWN-KIT-PLANNER.md) and [PROMISES-AND-PROOF.md](PROMISES-AND-PROOF.md). Historical unit balances below are not fresh account checks.
 
 ## The problem this version addresses
 

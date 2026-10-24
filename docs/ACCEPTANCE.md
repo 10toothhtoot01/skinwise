@@ -176,3 +176,10 @@ The exact676e3889source ZIP was extracted into a new directory with no dependenc
 An independent prerequisite review found the browser instructions omitted Pillow. A new Python3.14venv with only documented Playwright reproduced `ModuleNotFoundError: No module named PIL`. Added `tests/requirements.txt` for verifiedPlaywright1.59.0/Pillow12.3.0, explicit virtual-environment setup and `.venv` ignore. Installing that file in the fresh venv made all4decision cases pass41.250seconds against the fresh server. These dependencies requirePython3.10+; only3.14was executed here. The host's existing Chromium binary/native libraries were reused; this is not a cleanOS or all-platform claim.
 
 Free setup now needs only `npm ci`/`npm run dev`; the server key file is an explicit optional step for actual provider work. No new paid call, app/runtime change or new browser case was introduced by this handoff correction. Later source revisions contain documentation/test-requirements only, so matching runtime evidence is reused.
+
+
+## Promise-scope audit — October25
+
+An independent review found that the global promise matrix still described only the old journal/firstSDjob, and ordinary planner exports said “No face analysis” even though MakeupVTO processes a portrait. The matrix now covers the primary free planner and supporting skin workflow separately; dated API balances/testcounts/initialSDmethod examples are explicitly historical. Skin-only accuracy/value reports are scoped accordingly. Export limits now state the exact boundary: preview settings request zero skin smoothing, and the planner does not call the skin-analysis endpoint. No claim that portraits avoid processing is made.
+
+Runtime diff is only that explanatory export string. Four existing decision cases passed38.784seconds;19Node tests,TypeScript,gitdiffcheck and productionbuild passed. No new case or paidjob was added; prior unchanged functional evidence is reused. Focused independent review found no further unsupported generalization within the checked surfaces. Real-user benefit, physical shade accuracy, clinical validity and hardware coverage remain unvalidated.

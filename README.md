@@ -21,7 +21,7 @@ The supplied key was configured locally for this build in ignored `.dev.vars` an
 
 ## Accuracy and capture reliability
 
-Skinwise has not established clinical accuracy, measurement repeatability on users’ devices, or a reliable-change threshold for this SD API configuration. Scores are provider UI estimates, not physical hydration measurements, confidence probabilities, or product-effectiveness findings. Published validation on other configurations does not transfer automatically. See [evidence audit](docs/ACCURACY-EVIDENCE.md) and [promises with proof](docs/PROMISES-AND-PROOF.md).
+Skinwise has not established clinical accuracy, measurement repeatability on users’ devices, or a reliable-change threshold for the implemented API configurations. Scores are provider UI estimates, not physical hydration measurements, confidence probabilities, or product-effectiveness findings. Published validation on other configurations does not transfer automatically. See [evidence audit](docs/ACCURACY-EVIDENCE.md) and [promises with proof](docs/PROMISES-AND-PROOF.md).
 
 Optional YouCam guided capture checks face position, angle, lighting and resolution. It is loaded only after a user clicks to open the camera. Upload remains available with explicit unverified visual quality. Local image decode/dimension checks do not establish that a face is in focus. Hardware capture and SDK domain compatibility require real-device testing; SDK mocks cannot prove them. See [capture reliability](docs/CAPTURE-RELIABILITY.md).
 

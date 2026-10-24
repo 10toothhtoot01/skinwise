@@ -1,8 +1,10 @@
 # YouCam integration research — 2026-10-24
 
+This file contains protocol notes and dated integration history. Historical credit balances and test counts below are observations from those stages, not current account checks or the complete current suite. The primary product is the [own-kit planner](OWN-KIT-PLANNER.md); its API contract is in “Owned-kit makeup previews”. The current skin profile contract is in “Implemented contract for frontend”.
+
 ## Skills selected and inspected
 
-1. Vendor skill `skin-analysis-expert`, pinned revision `1ab10ffd15a396dbdc783c2b95c50b65ec54d8e4`, saved under `work/skills/api-youcam/`. Source: https://github.com/YouCam-API/skills/tree/1ab10ffd15a396dbdc783c2b95c50b65ec54d8e4/skills/skin-analysis-expert . The official documentation directly links this repository: https://docs.perfectcorp.com/develop/agent_skills . GitHub API reports zero stars, so popularity is not evidence here; selected as authoritative protocol reference with independent official OpenAPI cross-check. Read SKILL.md and references/interpretation.md. Adopted its score direction, SD/HD separation, real-result-only policy, JSON format, and polling instead of duplicate paid task creation. Its interactive pre-run questions concern running an analysis, not building software; the application exposes the chosen six-concern tier and cost before invocation.
+1. Vendor skill `skin-analysis-expert`, pinned revision `1ab10ffd15a396dbdc783c2b95c50b65ec54d8e4`, saved under `work/skills/api-youcam/`. Source: https://github.com/YouCam-API/skills/tree/1ab10ffd15a396dbdc783c2b95c50b65ec54d8e4/skills/skin-analysis-expert . The official documentation directly links this repository: https://docs.perfectcorp.com/develop/agent_skills . GitHub API reports zero stars, so popularity is not evidence here; selected as authoritative protocol reference with independent official OpenAPI cross-check. Read SKILL.md and references/interpretation.md. Adopted its score direction, SD/HD separation, real-result-only policy, JSON format, and polling instead of duplicate paid task creation. Its interactive pre-run questions concern running an analysis, not building software; the initial integration exposed six SD concerns; the current visible profile exposes four concerns and its dimension-dependent tier/cost before invocation.
 2. Anthropic `webapp-testing`, pinned revision `dbd4588f9e1033efb41dad4bef2f7947c8993d44`, saved under `work/skills/api-testing/`. Source: https://github.com/anthropics/skills/tree/dbd4588f9e1033efb41dad4bef2f7947c8993d44/skills/webapp-testing . GitHub API reported 183,269 stars. Read SKILL.md; relevant for parent browser verification. Leaderboard checked first at https://skills.sh/ . No unsupported install-count claim is made; no observed count for vendor skill.
 3. Read installed Vercel `next-best-practices` upstream skill for server route conventions, then used native Request/Response handlers and kept credentials in server modules. Its linked route-handler resource was unavailable in the installed package; did not invent missing guidance.
 
@@ -49,18 +51,18 @@ Applied the pinned official YouCam skill protocol and local surgical-patch metho
 Credential configuration is present. The initial zero-cost official GET `/s2s/v1.0/client/credit` returned an empty package list. After the user confirmed redemption, a fresh lookup returned HTTP200/provider status200 with two active API packages of1000 and40units, totaling1040spendable units. A later live workflow test used an AI-generated adult portrait (no real person) and completed successfully; see `docs/LIVE-VERIFICATION.md`. Real-person accuracy remains unverified. No image is uploaded during mocked tests. Public hosting, real API verification, Devpost submission, and public demo-video publishing are separate external actions. These are not claimed completed by backend implementation.
 
 
-## Verification and deployment boundary
+## Historical initial verification and deployment boundary
 
 Five mocked backend tests pass: byte/MIME/dimension validation, genuine-score normalization, exact upload/task/poll flow and signed receipts, missing configuration, and unexpected storage-host/provider-auth errors. TypeScript and scoped ESLint pass. Chunked multipart reads stop at9MB before parsing. Current hosting is owner-private; preserve platform access control. Publishing to arbitrary users requires deliberate budget/access controls first; provider limits do not replace app spending limits. The balance was rechecked after redemption and now reports1040spendable units; a synthetic-adult live test subsequently completed through the local API. Balance afterward was1028units, matching one12unit job. This proves integration, not real-skin validity.
 
 
-Native Node verification command: `node --experimental-strip-types --test tests/api.test.mjs` passes all5tests. AnalysisError uses plain property declarations, so no transformation flag or additional dependency is required.
+Initial Node verification command: `node --experimental-strip-types --test tests/api.test.mjs` passes all5tests. AnalysisError uses plain property declarations, so no transformation flag or additional dependency is required.
 
 
 Live workflow proof: `docs/LIVE-VERIFICATION.md`. Runtime corrections: Workers-compatible `redirect:manual` (3xx rejected), and multipart framework limit9MB matching bounded parser overhead. Private task receipt and provider storage URLs are excluded from public evidence.
 
 
-Truthfulness revision: numeric scores do not establish a comparable scale across different concerns. The API now returns `concerns:[]` rather than ranking action priorities. Labels use appearance/estimate terminology. Each result includes method metadata `{provider:"youcam",endpointVersion:"2.1",tier:"SD",scoreKind:"ui_score",modelVersion:null}`. Endpoint version is not a known model-engine version.
+Truthfulness revision: numeric scores do not establish a comparable scale across different concerns. The API now returns `concerns:[]` rather than ranking action priorities. Labels use appearance/estimate terminology. The initial SD result includes method metadata `{provider:"youcam",endpointVersion:"2.1",tier:"SD",scoreKind:"ui_score",modelVersion:null}`; the current visible profile may instead identify HD as described above. Endpoint version is not a known model-engine version.
 
 ## Owned-kit makeup previews
 
