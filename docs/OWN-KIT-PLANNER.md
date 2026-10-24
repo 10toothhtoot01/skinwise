@@ -38,3 +38,11 @@ The live integration uses only a clearly labelled generated adult portrait. A re
 ## Next validation gate
 
 Observe an intended user with an actual occasion and their actual kit. Compare this workflow against a simple swatch/photo board, varying task order. Record input burden, constraints met, physical application time, rendering failures, rejected options and whether the final choice is used or regretted. If the solver and previews do not improve this concrete decision, simplify or reject the concept. Software test counts cannot substitute for this gate.
+
+## Browser storage failure and private recovery
+
+An October24 follow-up audit reproduced two receipt-loss paths: an invalid saved session was overwritten by the empty fallback, and a browser write exception left a completed paid task only in memory with no warning. A subsequent explicit user retry after reload could therefore start another task; no automatic duplicate POST was observed.
+
+Unreadable saved bytes are now preserved until explicit clear or valid replacement, with byte-exact original export. New paid starts require a successful session write and readback before contacting the API. If storage fails after a task starts, the receipt remains in memory, the failure is visible, and existing-task GET checks remain available. Storage can still fail after preflight; no browser write check can guarantee the later write.
+
+A separate **private recovery file** contains the session metadata, portrait fingerprint and signed task receipts, but no photos, returned image URLs or server API key. Keep it private: it grants access to those tasks until their receipts expire. Valid import replaces the session after confirmation, invalidates in-flight work and clears current photo/image state. It makes no API call; the user explicitly checks existing tasks afterward. Invalid imports preserve the current session, and malformed JSON errors do not echo the file's contents. This file is different from the ordinary shareable plan export, which still excludes receipts and fingerprints.
