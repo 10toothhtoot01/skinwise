@@ -1,0 +1,2 @@
+# Server-only secret. Never use NEXT_PUBLIC_ or VITE_ prefixes.
+YOUCAM_API_KEY="replace-with-your-youcam-api-key"

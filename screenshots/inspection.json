@@ -1,0 +1,293 @@
+[
+  {
+    "viewport": "desktop",
+    "title": "Skinwise \u2014 A little more skin understanding",
+    "body": "Skip to content\nskinwise\n.\nA little care, every day\nOverview\nSkin check\nMy journal\nProgress\n\nGood skin days start\nwith understanding.\n\nSmall steps. Your pace.\nYour space, your data\nMy space / Overview\nSaved on this device\nS\n\nSaturday, October 24\n\nA good day to know your skin.\n\nLess guesswork. More you. Let\u2019s find what works for your skin.\n\nNew skin check\nYour skin has a story\nGet to know it.\nOne day at a time.\n\nUnderstand your skin, try one thoughtful change, and see what happens. A calmer kind of skincare journey.\n\nStart your skin check\nTake a sample walkthrough\nYour photos are never saved in your journal.\nA little more understanding.\nA little less guesswork.\nYour skin. A story worth following.\nA little structure. A lot less guessing.\nMade for the long run\nKnow your starting point\n\nA skin snapshot gives your observations a place to begin.\n\nChange just one thing\n\nMake a small, intentional change to your everyday routine.\n\nNotice what changes\n\nCheck in, compare over time, and learn at your own pace.\n\nYour journal starts here\nOne small step is enough.\n\nYou don\u2019t need a perfect routine. Just a starting point and a little curiosity.\n\nSet your first intention\n\nConsistency over perfection.\n\nYour skin changes. That\u2019s normal.\nWe\u2019re here to help you notice, not judge.\nCare, with a little more clarity.\nCosmetic insights. Personal observations. Always your pace.",
+    "controls": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "type": "",
+        "label": null,
+        "id": "",
+        "disabled": null
+      },
+      {
+        "tag": "A",
+        "text": "skinwise\n.",
+        "type": "",
+        "label": null,
+        "id": "",
+        "disabled": null
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Overview",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Skin check",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "My journal",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Progress",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Your space, your data",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "New skin check",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Start your skin check",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Take a sample walkthrough",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Set your first intention",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      }
+    ],
+    "horizontalOverflow": false,
+    "uncaughtErrors": []
+  },
+  {
+    "viewport": "mobile",
+    "title": "Skinwise \u2014 A little more skin understanding",
+    "body": "Skip to content\nskinwise\n.\nOverview\nSkin check\nMy journal\nProgress\nMy space / Overview\nSaved on this device\nS\n\nSaturday, October 24\n\nA good day to know your skin.\n\nLess guesswork. More you. Let\u2019s find what works for your skin.\n\nYour skin has a story\nGet to know it.\nOne day at a time.\n\nUnderstand your skin, try one thoughtful change, and see what happens. A calmer kind of skincare journey.\n\nStart your skin check\nTake a sample walkthrough\nYour photos are never saved in your journal.\nA little more understanding.\nA little less guesswork.\nYour skin. A story worth following.\nA little structure. A lot less guessing.\nKnow your starting point\n\nA skin snapshot gives your observations a place to begin.\n\n01\nChange just one thing\n\nMake a small, intentional change to your everyday routine.\n\n02\nNotice what changes\n\nCheck in, compare over time, and learn at your own pace.\n\n03\nYour journal starts here\nOne small step is enough.\n\nYou don\u2019t need a perfect routine. Just a starting point and a little curiosity.\n\nSet your first intention\n\nConsistency over perfection.\n\nYour skin changes. That\u2019s normal.\nWe\u2019re here to help you notice, not judge.\nCare, with a little more clarity.\nCosmetic insights. Personal observations. Always your pace.",
+    "controls": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "type": "",
+        "label": null,
+        "id": "",
+        "disabled": null
+      },
+      {
+        "tag": "A",
+        "text": "skinwise\n.",
+        "type": "",
+        "label": null,
+        "id": "",
+        "disabled": null
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Overview",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Skin check",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "My journal",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Progress",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": " Your space, your data",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": " New skin check",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Start your skin check",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Take a sample walkthrough",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Set your first intention",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      }
+    ],
+    "horizontalOverflow": false,
+    "uncaughtErrors": []
+  },
+  {
+    "viewport": "narrow",
+    "title": "Skinwise \u2014 A little more skin understanding",
+    "body": "Skip to content\nskinwise\n.\nOverview\nSkin check\nMy journal\nProgress\nMy space / Overview\nSaved on this device\nS\n\nSaturday, October 24\n\nA good day to know your skin.\n\nLess guesswork. More you. Let\u2019s find what works for your skin.\n\nYour skin has a story\nGet to know it.\nOne day at a time.\n\nUnderstand your skin, try one thoughtful change, and see what happens. A calmer kind of skincare journey.\n\nStart your skin check\nTake a sample walkthrough\nYour photos are never saved in your journal.\nA little more understanding.\nA little less guesswork.\nYour skin. A story worth following.\nA little structure. A lot less guessing.\nKnow your starting point\n\nA skin snapshot gives your observations a place to begin.\n\n01\nChange just one thing\n\nMake a small, intentional change to your everyday routine.\n\n02\nNotice what changes\n\nCheck in, compare over time, and learn at your own pace.\n\n03\nYour journal starts here\nOne small step is enough.\n\nYou don\u2019t need a perfect routine. Just a starting point and a little curiosity.\n\nSet your first intention\n\nConsistency over perfection.\n\nYour skin changes. That\u2019s normal.\nWe\u2019re here to help you notice, not judge.\nCare, with a little more clarity.\nCosmetic insights. Personal observations. Always your pace.",
+    "controls": [
+      {
+        "tag": "A",
+        "text": "Skip to content",
+        "type": "",
+        "label": null,
+        "id": "",
+        "disabled": null
+      },
+      {
+        "tag": "A",
+        "text": "skinwise\n.",
+        "type": "",
+        "label": null,
+        "id": "",
+        "disabled": null
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Overview",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Skin check",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "My journal",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Progress",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": " Your space, your data",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": " New skin check",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Start your skin check",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Take a sample walkthrough",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      },
+      {
+        "tag": "BUTTON",
+        "text": "Set your first intention",
+        "type": "submit",
+        "label": null,
+        "id": "",
+        "disabled": false
+      }
+    ],
+    "horizontalOverflow": false,
+    "uncaughtErrors": []
+  }
+]

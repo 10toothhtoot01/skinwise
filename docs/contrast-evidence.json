@@ -1,0 +1,72 @@
+[
+  {
+    "element": "body",
+    "foreground": "#58685e",
+    "background": "#f7f8f5",
+    "contrast": 5.54,
+    "passesAA": true
+  },
+  {
+    "element": "hero",
+    "foreground": "#526549",
+    "background": "#eaf0e3",
+    "contrast": 5.45,
+    "passesAA": true
+  },
+  {
+    "element": "journey",
+    "foreground": "#5e6c58",
+    "background": "#f7f8f5",
+    "contrast": 5.24,
+    "passesAA": true
+  },
+  {
+    "element": "lilac",
+    "foreground": "#6d5a80",
+    "background": "#eeebf5",
+    "contrast": 5.21,
+    "passesAA": true
+  },
+  {
+    "element": "sample",
+    "foreground": "#6b577e",
+    "background": "#ebe6f3",
+    "contrast": 5.21,
+    "passesAA": true
+  },
+  {
+    "element": "pill",
+    "foreground": "#526544",
+    "background": "#f0f3eb",
+    "contrast": 5.67,
+    "passesAA": true
+  },
+  {
+    "element": "footer",
+    "foreground": "#5e6c58",
+    "background": "#f7f8f5",
+    "contrast": 5.24,
+    "passesAA": true
+  },
+  {
+    "element": "button",
+    "foreground": "#ffffff",
+    "background": "#2b5745",
+    "contrast": 8.23,
+    "passesAA": true
+  },
+  {
+    "element": "fine-print",
+    "foreground": "#5f6d55",
+    "background": "#ffffff",
+    "contrast": 5.52,
+    "passesAA": true
+  },
+  {
+    "element": "nav",
+    "foreground": "#5b6a60",
+    "background": "#fcfdf9",
+    "contrast": 5.59,
+    "passesAA": true
+  }
+]

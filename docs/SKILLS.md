@@ -1,0 +1,14 @@
+# GitHub skill provenance and selection
+
+Retrieved 24 October 2026. Local sources are pinned to commits and SHA256 digests in work/skills/product-design-provenance.json.
+
+| Area | Selected skill | Source and evidence | Applied decision |
+| --- | --- | --- | --- |
+| Frontend design | frontend-design | https://github.com/anthropics/skills, official Anthropic; skills.sh rank 13, 1.0M installs; repository 183.2K stars at lookup | Ground UI in a personal skincare field journal; deliberate sage/lilac palette, specimen illustration; plan/review/build/critique |
+| UI quality | web-design-guidelines | https://github.com/vercel-labs/agent-skills, official Vercel; rank 55, 776.4K installs; repository 32.9K stars at lookup | Keyboard focus, labels, empty/loading/failure states, reduced motion, hydration checks |
+| Domain model | domain-modeling | https://github.com/mattpocock/skills; domain-modeling rank 21, 874.7K installs; repository 301.7K stars at lookup | Separate scan, sample scan, experiment, check-in, and comparison; no causal claim from scores |
+| React review | react-best-practices | Installed official Vercel skill | Version localStorage data, minimize persisted values, functional state updates, independent status fetch, no user-photo persistence |
+
+Leaderboard: https://skills.sh/. Popularity is corroborating evidence, not proof of quality. The selected skills were read and evaluated for task fit. We did not install arbitrary code or execute repository scripts. `to-spec` and `prototype` were inspected but not used: this task needs the final application, and does not need issue tracker publishing or a throwaway prototype. The Sites-supported Vinext starter determined deployment runtime; generic stack advice does not override actual hosting support.
+
+Capture reliability also consulted MathWorks' official [`matlab-process-images` skill and quality-assessment reference](https://github.com/matlab/matlab-agentic-toolkit/tree/main/skills-catalog/image-processing-and-computer-vision/matlab-process-images). Applied the method-selection cautions: full-reference metrics need aligned reference images, and generic no-reference quality metrics do not establish downstream skin-analysis validity. No MATLAB dependency or metric threshold was adopted. Pinned source hashes are retained in the research workspace. The official YouCam capture contract and actual SDK behavior determine the implemented acquisition checks.
