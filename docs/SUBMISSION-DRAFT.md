@@ -24,7 +24,7 @@ A separate skin evidence workspace at `/` can inspect real YouCam skin detection
 
 ## What we verified
 
-Four real YouCam jobs completed on a labelled AI-generated adult portrait: two skin-analysis jobs and two makeup configurations, including the complete three-effect recipe. The most recent recovery release passed12planner/recovery browser cases; earlier unchanged core flows have31additional browser cases and19Node contract/context/solver tests. TypeScript, scoped changed-component lint and production builds passed. Deployed checks verified real existing-task retrieval and preserved invalid browser data. Tests distinguish mocked responses, fictional kits and actual provider output.
+Four real YouCam jobs completed on a labelled AI-generated adult portrait: two skin-analysis jobs and two makeup configurations, including the complete three-effect recipe. The most recent reliability release passed14planner/recovery browser cases; earlier unchanged core flows have31additional browser cases and19Node contract/context/solver tests. TypeScript, scoped changed-component lint and production builds passed. Deployed checks verified real existing-task retrieval and preserved invalid browser data. An independent subset oracle matched69,120constraint cases across six fixed kits. Tests distinguish mocked responses, fictional kits and actual provider output.
 
 ## What remains uncertain
 

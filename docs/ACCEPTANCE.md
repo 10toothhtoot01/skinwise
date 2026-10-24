@@ -141,3 +141,16 @@ Two justified live makeup jobs used the same generated adult portrait: one lip-o
 The storage audit reproduced unreadable-session overwrite and quota/write-failure receipt loss using synthetic data and mocked API calls. The subsequent patch preserves invalid raw bytes, checks durable session read/write before a new paid POST, reports later write failures, and adds an explicit private metadata/receipt backup and restore path. Ordinary decision exports remain free of task-access data.
 
 The focused recovery suite covers original-byte export, preflight failure with zero POSTs, after-start write failure with in-memory private recovery and GET checks, valid private-file restore with no new generation, and invalid import preserving current data. A malformed-JSON private-prefix regression was first observed failing, then corrected with a generic format error. Exact final release results are recorded in the workspace progress ledger and delivery document. No real participant or paid API job was used for this follow-up.
+
+## Portrait preparation race and solver oracle
+
+Independent controlled-delay reproduction found that a replacement portrait could finish after a paid task had started on the previous portrait, deleting its new receipt and stranding the busy state. The regression failed before a preparation gate was added. The UI now pauses preview starts/checks and consent during preparation; synchronous refs guard handlers, latest-ticket ownership controls cleanup, and clear/restore cancels pending preparation. Regression cases cover release/reconsent/one mocked POST+GET and clearing while preparation is pending; an additional390px check and overlapping selections verify latest-photo ownership. No paid calls or physical-device claim.
+
+The independent solver oracle enumerates all binary product subsets rather than using the production category expansion. For six fixed representative kits (empty,9same-category,balanced9,7/1/1,2sparse,all30minute), it compares all8required×8excluded subsets×3product caps×60minute limits:69,120cases. It checks exact feasible-set equality, considered count, summed estimates, unique feasible shortlist of up to3, quickest-first and explanation presence/absence. All passed. This is bounded algorithm evidence, not proof for every possible kit, entered-time accuracy or consumer benefit.
+
+```sh
+node --experimental-strip-types tests/solver-oracle.mjs
+PYTHONPATH=tests python -m unittest -v browser_planner browser_planner_recovery
+```
+
+This release passed7planner cases in47.635seconds and7recovery cases in44.191seconds; the two focused390px cases passed12.857seconds.19Node tests, TypeScript, scoped planner lint and the official production build passed. Earlier31unchanged core/capture/evidence cases are reused:45browser cases across suites, not a claim that all45ran together. Source identity is recorded in the delivery package and workspace progress ledger.

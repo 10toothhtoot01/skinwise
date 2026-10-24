@@ -88,4 +88,45 @@ class PlannerRecovery(unittest.TestCase):
   expect(self.page.get_by_role('button',name='Choose this plan',exact=True)).to_be_enabled(timeout=10000)
   self.assertEqual(['POST','GET','GET'],self.calls);self.clean()
 
+ def delay_photo_preparation(self):
+  self.page.evaluate("""()=>{const original=HTMLCanvasElement.prototype.toBlob;
+   HTMLCanvasElement.prototype.toBlob=function(callback,...args){original.call(this,blob=>{
+    window.releasePlannerPhoto=()=>{HTMLCanvasElement.prototype.toBlob=original;callback(blob)};
+    window.plannerPhotoPending=true;
+   },...args)};
+  }""")
+  self.page.get_by_label('Portrait for visual rehearsal',exact=True).set_input_files({'name':'replacement.png','mimeType':'image/png','buffer':png(700,1024)})
+  self.page.wait_for_function('window.plannerPhotoPending===true')
+ def test_pending_photo_preparation_blocks_paid_start_and_recovers(self):
+  self.ready();previous=self.stored()['sourceHash'];self.delay_photo_preparation()
+  consent=self.page.get_by_label(base.re.compile('I have permission'))
+  preview=self.page.get_by_role('button',name='Preview this option · 1 unit',exact=True)
+  expect(consent).to_be_disabled()
+  expect(consent).not_to_be_checked()
+  expect(preview).to_be_disabled()
+  # Programmatic events must not bypass pending-source ownership guards.
+  consent.dispatch_event('click');preview.dispatch_event('click')
+  self.assertEqual([],self.calls);self.assertEqual([],self.stored()['tasks'])
+  self.page.evaluate('window.releasePlannerPhoto()')
+  self.page.wait_for_function('([key,previous])=>JSON.parse(sessionStorage.getItem(key)).sourceHash!==previous',arg=[base.KEY,previous])
+  expect(self.page.get_by_role('status')).to_contain_text('Prepared 700 × 1024 JPEG')
+  expect(consent).to_be_enabled();expect(consent).not_to_be_checked()
+  expect(self.page.get_by_label('Portrait for visual rehearsal',exact=True)).to_be_enabled()
+  expect(preview).to_be_disabled();self.assertEqual([],self.calls)
+  consent.check();self.render()
+  self.assertEqual(['POST','GET'],self.calls);self.assertEqual(1,len(self.stored()['tasks']));self.clean()
+ def test_clear_during_pending_photo_does_not_resurrect_source(self):
+  self.ready();self.delay_photo_preparation()
+  self.page.once('dialog',lambda dialog:dialog.accept())
+  self.page.get_by_role('button',name='Clear session',exact=True).click()
+  self.page.evaluate('window.releasePlannerPhoto()')
+  # Flush the callback, blob/hash promises and React update opportunity.
+  self.page.wait_for_timeout(150)
+  self.assertIsNone(self.stored()['sourceHash']);self.assertEqual([],self.stored()['products'])
+  self.assertEqual([],self.stored()['tasks'])
+  expect(self.page.get_by_role('img',name='Prepared original portrait',exact=True)).to_have_count(0)
+  expect(self.page.get_by_role('button',name='Checking preview…',exact=True)).to_have_count(0)
+  expect(self.page.get_by_label('Portrait for visual rehearsal',exact=True)).to_be_enabled()
+  self.assertEqual([],self.calls);self.clean()
+
 if __name__=='__main__':unittest.main(verbosity=2)

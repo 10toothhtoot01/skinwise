@@ -56,6 +56,8 @@ node --experimental-strip-types --test tests/api.test.mjs tests/capture-context.
 npm run build
 ```
 
+For the independent69,120case bounded solver audit, run `node --experimental-strip-types tests/solver-oracle.mjs`. This verifies supplied constraints, not physical times or consumer outcomes.
+
 For planner/recovery browser checks after installing Python Playwright and Chromium:
 
 ```bash
