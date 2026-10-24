@@ -60,3 +60,8 @@ See [build decisions](docs/BUILD-DECISIONS.md), [submission draft](docs/SUBMISSI
 ## Skill gate and improvement
 
 The GitHub-sourced skills used for UI, React, API integration and testing are documented with provenance. We select skills for quality and fit; popularity does not establish correctness. Improvement loops select an observed defect or unmet acceptance condition, make one bounded change, run focused evidence, and request independent review at milestones. Passing areas are not repeatedly rewritten without a new reason.
+
+
+## Own-kit look lab
+
+Open `/planner` for the experimental owned-product constraint solver, bounded YouCam makeup previews, preference graph and decision export. See [OWN-KIT-PLANNER.md](docs/OWN-KIT-PLANNER.md) for its software contribution, limits, source provenance and validation gate. The original skin workflow is preserved. New backend environment requirements are unchanged.

@@ -61,3 +61,11 @@ Live workflow proof: `docs/LIVE-VERIFICATION.md`. Runtime corrections: Workers-c
 
 
 Truthfulness revision: numeric scores do not establish a comparable scale across different concerns. The API now returns `concerns:[]` rather than ranking action priorities. Labels use appearance/estimate terminology. Each result includes method metadata `{provider:"youcam",endpointVersion:"2.1",tier:"SD",scoreKind:"ui_score",modelVersion:null}`. Endpoint version is not a known model-engine version.
+
+## Owned-kit makeup previews
+
+`POST /api/makeup` accepts bounded multipart fields `file`, `plan` (JSON `{products,rules}`) and `recipeId`. The server validates the kit/constraint schema, recomputes feasible recipes and refuses a nonmember before any upstream request. Valid prepared JPEG/PNG input has a short side at least480 and long side at most1024; the existing8MB application limit applies. This is a conservative app envelope, not a complete face-quality check.
+
+The adapter uses the existing file-metadata→signed bytePUT flow, then `POST /s2s/v2.0/task/makeup-vto` with `src_file_id`, `version:'1.0'` and server-constructed effects. It explicitly zeroes both skin-smoothing fields and lip morphology. The response contains a24hour HMAC task receipt signed with a makeup-specific domain prefix. `GET /api/makeup?taskId=...&token=...` validates it before upstream GET; it accepts documented running states and the documented results URL shapes, retaining only a real HTTPS AWS destination. No API key is returned or sent to the upload host.
+
+Each explicit start costs1unit according to the consulted provider documentation; no unit is spent by the local constraint solver. GET task checks and image refreshes create no replacement job. A failed/ambiguous start can have reached the provider: the UI never silently retries a POST. The owner-private hosting boundary is preserved. The50task session guard is not a server-wide budget or rate-limit policy.
