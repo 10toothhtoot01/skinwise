@@ -48,6 +48,7 @@ yarn-error.log*
 !.dev.vars.example
 
 # Python/browser verification caches
+/.venv/
 __pycache__/
 *.pyc
 /test-results/

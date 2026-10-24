@@ -10,12 +10,12 @@ Requires Node.js 22.13+ and npm. From this directory:
 
 ```bash
 npm ci
-cp .dev.vars.example .dev.vars
-# Edit .dev.vars with your YouCam key. Never commit it.
 npm run dev
 ```
 
 Open `/planner` on the Local URL printed by the server (normally http://127.0.0.1:5173/planner). The solver and clearly fictional kit walkthrough need no API key or units. A real optional makeup preview needs a server key with active units and costs1unit per explicit start according to the consulted reference. The separate skin workspace at `/` costs12units inHD or9units inSD for its four-concern visible profile. `GET /api/status` only checks whether a key is configured, not whether it has credits.
+
+To enable actual provider previews or skin analysis, copy `.dev.vars.example` to `.dev.vars`, replace the placeholder with your server-only YouCam key, and restart the server. Free planning needs no environment file. Never commit the real key.
 
 The supplied key was configured locally for this build in ignored `.dev.vars` and as a secret on the private Sites deployment. It is not included in source or a downloadable source archive. Other developers supply their own key.
 
@@ -58,15 +58,20 @@ npm run build
 
 For the independent69,120case bounded solver audit, run `node --experimental-strip-types tests/solver-oracle.mjs`. This verifies supplied constraints, not physical times or consumer outcomes.
 
-For planner/recovery browser checks after installing Python Playwright and Chromium:
+The pinned test dependencies require Python3.10+ (Python3.14 was verified here). For browser checks, create a Python virtual environment and install the tested Playwright/Pillow dependencies plus Chromium. These activation commands use a POSIX shell:
 
 ```bash
+python -m venv .venv
+. .venv/bin/activate
+python -m pip install -r tests/requirements.txt
+python -m playwright install chromium
+# Start npm run dev in another terminal before running the suite.
 PYTHONPATH=tests python -m unittest -v browser_planner browser_planner_recovery browser_planner_decision
 ```
 
 These tests intercept provider calls and do not spend API units. Planner previews cost1unit per explicit start according to the consulted provider reference; the local solver spends none.
 
-Exact tested commands, browser checks and their limits are recorded in [acceptance evidence](docs/ACCEPTANCE.md). Development browser tests require Python Playwright and Chromium.
+Exact tested commands, browser checks and their limits are recorded in [acceptance evidence](docs/ACCEPTANCE.md). Development browser tests require Python Playwright, Pillow and Chromium. A clean Linux extraction was verified with Node22.23.1/npm10.9.8/Python3.14; this is not a claim of every operating system or Python version.
 
 See [build decisions](docs/BUILD-DECISIONS.md), [submission draft](docs/SUBMISSION-DRAFT.md), and [demo recording script](docs/DEMO-SCRIPT.md). The repository is MIT licensed; included starter/vendor assets retain their license notices. Submission still requires a judge-accessible repository, screenshots and a publicly visible 1–3 minute video.
 

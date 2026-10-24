@@ -1,0 +1,3 @@
+# Verified browser-test tooling. Install Chromium separately with Playwright.
+playwright==1.59.0
+Pillow==12.3.0

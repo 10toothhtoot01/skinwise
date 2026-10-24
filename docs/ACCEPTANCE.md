@@ -35,7 +35,7 @@ SKINWISE_BASE_URL=http://127.0.0.1:5173 python tests/browser_acceptance.py
 SKINWISE_BASE_URL=http://127.0.0.1:5173 python tests/browser_inspect.py
 ```
 
-Prerequisite: Python Playwright and its Chromium browser (`python -m pip install playwright`, then `python -m playwright install chromium`). Tests use Chromium headless; rendered DOM was inspected before controls were selected. Screenshots and per-case request/error logs are written to `../../work/qa-acceptance` by default; override `SKINWISE_EVIDENCE_DIR` to keep them elsewhere. Responsive inspection uses `test-results/browser` by default.
+Prerequisite: Python Playwright, Pillow and Chromium (`python -m pip install -r tests/requirements.txt`, then `python -m playwright install chromium`). Tests use Chromium headless; rendered DOM was inspected before controls were selected. Screenshots and per-case request/error logs are written to `../../work/qa-acceptance` by default; override `SKINWISE_EVIDENCE_DIR` to keep them elsewhere. Responsive inspection uses `test-results/browser` by default.
 
 The automated suite includes a pending-analysis refresh test: it records exactly one POST, reloads before polling, resumes the preserved receipt with one GET, and asserts the resulting live record. Consent is unchecked after reload and no second upload occurs.
 
@@ -167,3 +167,12 @@ The14nearest planner/recovery regression cases passed84.920seconds after source 
 ```sh
 PYTHONPATH=tests python -m unittest -v browser_planner browser_planner_recovery browser_planner_decision
 ```
+
+
+## Clean-source handoff verification — October25
+
+The exact676e3889source ZIP was extracted into a new directory with no dependencies, key file, Git metadata, `.sites-runtime` or `.wrangler` state. OnLinux/Node22.23.1/npm10.9.8, documented `npm ci` installed687packages; TypeScript,19Node tests and `npm run build` passed. A fresh devserver on5181 returned HTTP200 with keyconfiguredfalse; a fictional full-catalog choice exported exact products/seven estimated minutes with zero paid-API attempts and no browser exceptions. The owned fresh devserver was stopped afterward.
+
+An independent prerequisite review found the browser instructions omitted Pillow. A new Python3.14venv with only documented Playwright reproduced `ModuleNotFoundError: No module named PIL`. Added `tests/requirements.txt` for verifiedPlaywright1.59.0/Pillow12.3.0, explicit virtual-environment setup and `.venv` ignore. Installing that file in the fresh venv made all4decision cases pass41.250seconds against the fresh server. These dependencies requirePython3.10+; only3.14was executed here. The host's existing Chromium binary/native libraries were reused; this is not a cleanOS or all-platform claim.
+
+Free setup now needs only `npm ci`/`npm run dev`; the server key file is an explicit optional step for actual provider work. No new paid call, app/runtime change or new browser case was introduced by this handoff correction. Later source revisions contain documentation/test-requirements only, so matching runtime evidence is reused.
