@@ -21,3 +21,5 @@ The [official YouCam beauty-advisor skill](https://github.com/YouCam-API/skills/
 
 
 Submission messaging also applies [phuryn value-prop-statements](https://github.com/phuryn/pm-skills/blob/07b34f64ee828df08953f505b7f747aef85ae7c6/pm-marketing-growth/skills/value-prop-statements/SKILL.md), read at the same pinned revision. Its segment→outcome→capability method was constrained by actual evidence: no measured savings, physical shade fidelity or real-user benefit is claimed. Snapshot/hash are recorded in workspace provenance.
+
+Pinned mattpocock domain-modeling guidance also resolves decision context versus render specification in `GLOSSARY.md`: only changes to the actual portrait/effects justify a different visual rehearsal. This informed the render-reuse correction without merging contextual preferences or inventing a physical product match.

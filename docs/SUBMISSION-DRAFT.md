@@ -18,13 +18,13 @@ Optional YouCam previews use the same prepared original for every option. The us
 
 React and TypeScript run on Vinext and Cloudflare Workers. The server recomputes recipe feasibility before calling YouCam Makeup VTO. It uploads the image through the File API, starts the asynchronous makeup task and provides a signed receipt for GET-only recovery. Effects explicitly set skin smoothing and lip morphology to zero. Results come from the provider; no generated success is substituted after an error.
 
-Our contribution is the constraint solver, infeasibility explanations, bounded comparison design, preference graph, original-photo ownership checks and decision export. Browser storage failures are visible; unreadable sessions are preserved; separate private backup/restore files retain task access. Ordinary plan exports exclude photos, result URLs and access receipts. API credentials remain on the server.
+Our contribution is the constraint solver, infeasibility explanations, bounded comparison design, preference graph, original-photo ownership checks, exact-effect task reuse across changed planning limits, and decision export. Browser storage failures are visible; unreadable sessions are preserved; separate private backup/restore files retain task access. Ordinary plan exports exclude photos, result URLs and access receipts. API credentials remain on the server.
 
 A separate skin evidence workspace at `/` can inspect real YouCam skin detection images and returned regional scores. It does not determine makeup suitability, health or treatment. It is a supporting capability, not a prerequisite for the planner.
 
 ## What we verified
 
-Four real YouCam jobs completed on a labelled AI-generated adult portrait: two skin-analysis jobs and two makeup configurations, including the complete three-effect recipe. The most recent core-decision release passed18planner/recovery/decision browser cases; earlier unchanged core flows have31additional browser cases and19Node contract/context/solver tests. TypeScript, scoped changed-component lint and production builds passed. Deployed checks verified real existing-task retrieval and preserved invalid browser data. An independent subset oracle matched69,120constraint cases across six fixed kits. Tests distinguish mocked responses, fictional kits and actual provider output.
+Four real YouCam jobs completed on a labelled AI-generated adult portrait: two skin-analysis jobs and two makeup configurations, including the complete three-effect recipe. The most recent render-reuse release passed24planner/recovery/decision/reuse browser cases; earlier unchanged core flows have31additional browser cases and19Node contract/context/solver tests. TypeScript, scoped changed-component lint and production builds passed. Deployed checks verified real existing-task retrieval and preserved invalid browser data. An independent subset oracle matched69,120constraint cases across six fixed kits. Tests distinguish mocked responses, fictional kits and actual provider output.
 
 ## What remains uncertain
 

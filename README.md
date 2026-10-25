@@ -32,7 +32,7 @@ Optional YouCam guided capture checks face position, angle, lighting and resolut
 3. Open the catalog of every feasible combination. Choose one without a preview, or choose no added makeup, and export the exact plan for free. The export records the basis of your decision.
 4. For an optional visual preview, open any combination’s preview card. This makes no API request. To render, clear the fictional session, enter your owned products, prepare a permitted adult portrait and explicitly consent to processing/cost. All options start from the same prepared original.
 5. Inspect actual output for artifacts, compare available options, record a preference/tie/rejection and choose a plan explicitly. Digital colors and time estimates are not physical guarantees.
-6. Keep private task-recovery files separate from ordinary shareable plan exports. Check an existing task with GET rather than start another paid job. Recovery does not extend receipt expiry.
+6. Keep private task-recovery files separate from ordinary shareable plan exports. Check an existing task with GET rather than start another paid job. Recovery does not extend receipt expiry. Changing limits or product labels reuses a task when the same portrait and exact digital settings match; it does not spend another unit merely because the decision context changed.
 
 The supporting `/` skin workspace has its own labelled sample, optional guided capture, real detection images and journal. It preserves source/capture context and describes score differences without a product-effectiveness verdict. It does not supply makeup recommendations.
 
@@ -66,7 +66,7 @@ python -m venv .venv
 python -m pip install -r tests/requirements.txt
 python -m playwright install chromium
 # Start npm run dev in another terminal before running the suite.
-PYTHONPATH=tests python -m unittest -v browser_planner browser_planner_recovery browser_planner_decision
+PYTHONPATH=tests python -m unittest -v browser_planner browser_planner_recovery browser_planner_decision browser_planner_reuse
 ```
 
 These tests intercept provider calls and do not spend API units. Planner previews cost1unit per explicit start according to the consulted provider reference; the local solver spends none.

@@ -29,6 +29,9 @@ export function solvePlan(input:unknown){
  return {recipes,shortlist,reasons,considered:nonempty.length};
 }
 export function makeupEffects(products:Product[]){return [{category:'skin_smooth',skinSmoothStrength:0,skinSmoothColorIntensity:0},...products.map(p=>p.category==='lip_color'?{category:p.category,shape:{name:'original'},morphology:{fullness:0,wrinkless:0},palettes:[{color:p.color,texture:'matte',colorIntensity:50}],style:{type:'full'}}:{category:p.category,pattern:{name:'1color1'},palettes:[{color:p.color,texture:'matte',colorIntensity:50}]})];}
+// Bump this version before changing effect defaults; unknown legacy snapshots must not inherit new settings.
+export const makeupRenderVersion='owned-kit-matte-v1';
+export function makeupRenderIdentity(products:Product[]){return JSON.stringify({version:makeupRenderVersion,effects:makeupEffects(products)});}
 export type Comparison={a:string;b:string;choice:'a'|'b'|'tie'|'neither'};
 export function preferenceState(ids:string[],comparisons:Comparison[]){
  const valid=comparisons.filter(c=>ids.includes(c.a)&&ids.includes(c.b)&&c.a!==c.b);

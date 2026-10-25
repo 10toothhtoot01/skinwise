@@ -111,7 +111,7 @@ class PlannerAcceptance(unittest.TestCase):
   self.assertIsNone(self.stored()['selected']);self.clean()
  def test_task_limit_blocks_post_preserves_receipts(self):
   self.ready()
-  self.page.evaluate('''key=>{const m=JSON.parse(sessionStorage.getItem(key));m.tasks=Array.from({length:50},(_,i)=>({key:'previous-'+i,recipe:{id:'previous-'+i,key:'previous-'+i,products:[m.products[0]],minutes:3},taskId:'mock-'+i,token:'receipt-'+i}));sessionStorage.setItem(key,JSON.stringify(m));}''',KEY)
+  self.page.evaluate('''key=>{const m=JSON.parse(sessionStorage.getItem(key));m.tasks=Array.from({length:50},(_,i)=>({key:'previous-'+i,recipe:{id:'previous-'+i,key:'previous-'+i,products:[{...m.products[0],color:'#123456'}],minutes:3},taskId:'mock-'+i,token:'receipt-'+i}));sessionStorage.setItem(key,JSON.stringify(m));}''',KEY)
   self.page.reload();self.page.wait_for_load_state('networkidle');self.photo()
   self.page.get_by_label(re.compile('I have permission')).check()
   self.page.get_by_role('button',name='Preview this option · 1 unit',exact=True).click()

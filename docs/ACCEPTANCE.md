@@ -183,3 +183,18 @@ Free setup now needs only `npm ci`/`npm run dev`; the server key file is an expl
 An independent review found that the global promise matrix still described only the old journal/firstSDjob, and ordinary planner exports said “No face analysis” even though MakeupVTO processes a portrait. The matrix now covers the primary free planner and supporting skin workflow separately; dated API balances/testcounts/initialSDmethod examples are explicitly historical. Skin-only accuracy/value reports are scoped accordingly. Export limits now state the exact boundary: preview settings request zero skin smoothing, and the planner does not call the skin-analysis endpoint. No claim that portraits avoid processing is made.
 
 Runtime diff is only that explanatory export string. Four existing decision cases passed38.784seconds;19Node tests,TypeScript,gitdiffcheck and productionbuild passed. No new case or paidjob was added; prior unchanged functional evidence is reused. Focused independent review found no further unsupported generalization within the checked surfaces. Real-user benefit, physical shade accuracy, clinical validity and hardware coverage remain unvalidated.
+
+
+## Render reuse versus decision context — October25
+
+Independent normal-flow reproduction found a lip preview createdPOST+GET, then a10→9minute budget change exposed another paidstart even though portrait and exact digital effects were unchanged; a second mockedPOST+GET created a redundant receipt. The red browser regression reproduced the missingGETreuse path.
+
+Task lookup now separates contextual recipe keys from versioned exact rendering settings inside the current portrait session. New receipts retain that rendering snapshot; known original matte-v1 legacy records have an explicit compatibility path. Lookup enforces snapshot equality before preferring an exact context, otherwise the newest compatible task. Both button and handler share lookup. Reuse appends no aliases; unique prior taskIDs are retained. Different settings/colors/categories/portraits or incompatible snapshots are not reused. Contextual choices still reset on changed constraints as before; this patch preserves task access, not all past preference contexts.
+
+Six new mocked cases passed55.860seconds. The18nearest planner/recovery/decision regressions passed124.788seconds;19Node,TypeScript,scopedplanner/librarylint,productionbuild andgitdiffcheck passed. A390px rules-only case and exact-context/newest-compatible priority probe passed with no overflow or exceptions. The existing50task cap fixture now uses a genuinely different stored color; a matching existing render can legitimately be retrieved even at the cap, while a distinct new render still cannotPOST.55browser cases across suites:24currentplanner/recovery/decision/reuse +31earlier unchanged core/capture/evidence. No claim all55ran in one invocation.
+
+No new real provider generation was needed: endpoint/effects are unchanged. This is session-level reuse, not global idempotency, a permanent image cache or a guarantee of savings. Failed/expired/ambiguous starts are not automatically replaced.
+
+```sh
+PYTHONPATH=tests python -m unittest -v browser_planner browser_planner_recovery browser_planner_decision browser_planner_reuse
+```
