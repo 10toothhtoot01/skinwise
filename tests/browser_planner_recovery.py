@@ -129,4 +129,71 @@ class PlannerRecovery(unittest.TestCase):
   expect(self.page.get_by_label('Portrait for visual rehearsal',exact=True)).to_be_enabled()
   self.assertEqual([],self.calls);self.clean()
 
+ def delay_recovery_reads(self):
+  self.recoveryProbeEmpty=self.stored()
+  self.page.evaluate("""()=>{const original=Blob.prototype.text;window.plannerRecoveryReads={};
+   Blob.prototype.text=function(){const file=this;return new Promise((resolve,reject)=>{
+    window.plannerRecoveryReads[file.name]={resolve:()=>original.call(file).then(resolve,reject),reject:()=>reject(new Error('Mock stale read failure'))};
+   })};
+  }""")
+ def queue_recovery(self,name,event='Recovered occasion',raw=None):
+  self.recovery();model={**(self.stored() or self.recoveryProbeEmpty),'event':event}
+  self.page.get_by_label('Restore a private recovery file',exact=True).set_input_files({'name':name,'mimeType':'application/json','buffer':(raw if raw is not None else json.dumps(model)).encode()})
+  self.page.wait_for_function('(name)=>!!window.plannerRecoveryReads[name]',arg=name)
+ def release_recovery(self,name,reject=False):
+  self.page.evaluate('([name,operation])=>window.plannerRecoveryReads[name][operation]()',[name,'reject' if reject else 'resolve'])
+  self.page.wait_for_timeout(100)
+ def reset_for_recovery_probe(self):
+  self.page.once('dialog',lambda dialog:dialog.accept())
+  self.page.get_by_role('button',name='Clear session',exact=True).click()
+ def test_latest_recovery_selection_wins_in_both_completion_orders(self):
+  self.delay_recovery_reads()
+  for index,order in enumerate([('earlier','latest'),('latest','earlier')]):
+   with self.subTest(completion_order=order):
+    if index:self.reset_for_recovery_probe()
+    names={which:f'{which}-{index}.json' for which in order}
+    self.queue_recovery(names['earlier'],'Earlier file');self.queue_recovery(names['latest'],'Latest file')
+    for which in order:self.release_recovery(names[which])
+    self.assertEqual('Latest file',self.stored()['event'])
+    expect(self.page.locator('.planner-shell > .planner-message[role=status]')).to_contain_text('Recovery file restored')
+  self.assertEqual([],self.calls);self.clean()
+ def test_stale_recovery_read_errors_cannot_replace_newer_success_status(self):
+  self.delay_recovery_reads()
+  for index,reject in enumerate([False,True]):
+   with self.subTest(rejected_read=reject):
+    if index:self.reset_for_recovery_probe()
+    old=f'old-{index}.json';new=f'new-{index}.json'
+    self.queue_recovery(old,raw='malformed old recovery');self.queue_recovery(new,'Latest valid file')
+    self.release_recovery(new)
+    expect(self.page.locator('.planner-shell > .planner-message[role=status]')).to_contain_text('Recovery file restored')
+    self.release_recovery(old,reject=reject)
+    self.assertEqual('Latest valid file',self.stored()['event'])
+    expect(self.page.locator('.planner-shell > .planner-message[role=status]')).to_contain_text('Recovery file restored')
+  self.assertEqual([],self.calls);self.clean()
+ def test_clear_invalidates_pending_recovery_reads_and_errors(self):
+  self.delay_recovery_reads()
+  for index,reject in enumerate([False,True]):
+   with self.subTest(rejected_read=reject):
+    name=f'cleared-{index}.json';self.queue_recovery(name)
+    self.reset_for_recovery_probe();self.release_recovery(name,reject=reject)
+    self.assertEqual(0,self.page.locator('.planner-kit li').count());self.assertEqual('',self.page.get_by_label('What are you getting ready for?',exact=True).input_value())
+    expect(self.page.locator('.planner-shell > .planner-message[role=status]')).to_contain_text('Planning session cleared')
+  self.assertEqual([],self.calls);self.clean()
+ def test_local_edits_while_recovery_reads_require_current_state_confirmation(self):
+  self.delay_recovery_reads()
+  for index,kind in enumerate(['owned-product','occasion-only']):
+   with self.subTest(local_edit=kind):
+    if index:self.reset_for_recovery_probe()
+    name=f'edited-{index}.json';self.queue_recovery(name)
+    if kind=='owned-product':self.add('Newly entered owned lip')
+    else:self.page.get_by_label('What are you getting ready for?',exact=True).fill('New local occasion')
+    before=self.stored();dialogs=[]
+    def dismiss(dialog):dialogs.append(dialog.message);dialog.dismiss()
+    self.page.once('dialog',dismiss);self.release_recovery(name)
+    self.page.remove_listener('dialog',dismiss)
+    self.assertEqual(1,len(dialogs),'Pending restore must inspect current local edits before replacement')
+    self.assertIn('Replace this planning session',dialogs[0])
+    self.assertEqual(before,self.stored(),'Dismissing replacement must preserve the edited kit or occasion')
+  self.assertEqual([],self.calls);self.clean()
+
 if __name__=='__main__':unittest.main(verbosity=2)

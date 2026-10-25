@@ -198,3 +198,14 @@ No new real provider generation was needed: endpoint/effects are unchanged. This
 ```sh
 PYTHONPATH=tests python -m unittest -v browser_planner browser_planner_recovery browser_planner_decision browser_planner_reuse
 ```
+
+
+## Recovery-file selection and current-session ownership — October25
+
+Independent delayed-file probes reproduced two ordinary UI failures on28078b9: selecting A then B could restore A if its read completed first, and reading from an empty session could overwrite an owned product entered during the read without confirmation. Stale malformed/read errors could also replace a newer success or cleared-session status. Four focused regression methods covering eight completion/error/edit subcases produced six expected failures before the fix (24.503seconds).
+
+A dedicated recovery-read ticket now gives the latest selected file ownership, combined with the existing session generation. Both stale successes and stale errors are ignored; clear/unmount invalidate reads. Replacement confirmation inspects the current committed session after reading, including intervening product, occasion and limit edits. Recovery format, provider calls, effect settings and solver semantics are unchanged.
+
+All11recovery methods passed49.534seconds. Independent390px execution of the four new methods/eight subcases passed11.438seconds with no overflow, API calls or uncaught errors. Independent diff review found no further defect within tested ordinary-event sequences. TypeScript,19Node tests and scoped planner lint passed; the official production build passed. The17nearest remaining planner/decision/reuse methods passed137.474seconds. Total available browser methods are59across suites:28current planner/recovery/decision/reuse and31earlier unchanged supporting cases; not one59method run and not physical-device or participant validation.
+
+A separate offline backend audit covered19failure-stage/control cases: registration, byte upload, ambiguous task creation, missing receipt, queued/running/terminal/unknown states, missing/successful image, throttled/failed retrieval and expired receipt. Each start stage stopped at its first failure; task retrieval remained GET-only and expiry rejected before network. All fetches were mocked; this is no-retry contract proof, not live-provider availability or image-decoding proof. Safe workspace evidence includes library hashes; no additional paid task was started.
