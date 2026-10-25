@@ -1,0 +1,20 @@
+[
+ {"id":"lip-supported","request":{"question":"lip-edge","context":"slanted-bullet"},"status":"supported"},
+ {"id":"blush-supported","request":{"question":"blush-placement","context":"cheek-blush"},"status":"supported"},
+ {"id":"eye-supported","request":{"question":"shadow-edge","context":"brush-eyeshadow"},"status":"supported"},
+ {"id":"lip-unknown","request":{"question":"lip-edge","context":"unknown"},"status":"needs-context"},
+ {"id":"lip-liquid","request":{"question":"lip-edge","context":"liquid"},"status":"needs-context"},
+ {"id":"eye-finger","request":{"question":"shadow-edge","context":"finger"},"status":"needs-context"},
+ {"id":"eye-unknown","request":{"question":"shadow-edge","context":"unknown"},"status":"needs-context"},
+ {"id":"blush-cross-use","request":{"question":"blush-placement","context":"lipstick"},"status":"needs-context"},
+ {"id":"unknown-question","request":{"question":"foundation-match","context":"unknown"},"status":"unavailable"},
+ {"id":"product-unconfirmed","request":{"question":"lip-edge","context":"slanted-bullet","claim":"product-specific"},"status":"unavailable"},
+ {"id":"product-confirmed-no-corpus","request":{"question":"lip-edge","context":"slanted-bullet","claim":"product-specific","identity":"confirmed"},"status":"unavailable"},
+ {"id":"shade","request":{"question":"blush-placement","context":"cheek-blush","claim":"shade-match"},"status":"unavailable"},
+ {"id":"wear","request":{"question":"lip-edge","context":"slanted-bullet","claim":"wear-time"},"status":"unavailable"},
+ {"id":"allergy","request":{"question":"shadow-edge","context":"brush-eyeshadow","claim":"allergy"},"status":"unavailable"},
+ {"id":"reviews","request":{"question":"lip-edge","context":"slanted-bullet","claim":"reviews"},"status":"unavailable"},
+ {"id":"conflict","request":{"question":"lip-edge","context":"slanted-bullet","evidence":"conflicting"},"status":"unavailable"},
+ {"id":"stale","request":{"question":"shadow-edge","context":"brush-eyeshadow","evidence":"stale"},"status":"unavailable"},
+ {"id":"missing","request":{"question":"blush-placement","context":"cheek-blush","evidence":"missing"},"status":"unavailable"}
+]

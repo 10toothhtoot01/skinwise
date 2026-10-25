@@ -83,3 +83,15 @@ The GitHub-sourced skills used for UI, React, API integration and testing are do
 ## Own-kit look lab
 
 Open `/planner` for the experimental owned-product constraint solver, bounded YouCam makeup previews, preference graph and decision export. See [OWN-KIT-PLANNER.md](docs/OWN-KIT-PLANNER.md) for its software contribution, limits, source provenance and validation gate. The original skin workflow is preserved. New backend environment requirements are unchanged.
+
+## Practical expansion
+
+The planner now includes a readable chosen-plan card, text/print handoff, product corrections, reusable-kit files, three sourced technique questions, private self-reported observations and an optional native selfie input with upload fallback. See [scope and evidence](docs/PRACTICAL-EXPANSION.md) and [guidance sources](docs/GUIDANCE-SOURCES.md). External review aggregation and physical cosmetic accuracy remain unestablished. Native capture is a browser hint, not a verified device-camera capability.
+
+Additional checks:
+```sh
+node --experimental-strip-types --test tests/guidance.test.mjs
+PYTHONPATH=tests python -m unittest -v browser_planner_practical browser_planner_evidence browser_planner_kit
+```
+
+The planner's studio UI includes sticky section navigation, live overview, searchable feasible combinations and responsive editing/preview/learning panels. Decorative cosmetics are an illustration; actual provider previews remain separately labelled.
