@@ -24,7 +24,7 @@ A separate skin evidence workspace at `/` can inspect real YouCam skin detection
 
 ## What we verified
 
-Four real YouCam jobs completed on a labelled AI-generated adult portrait: two skin-analysis jobs and two makeup configurations, including the complete three-effect recipe. The most recent render-reuse release passed24planner/recovery/decision/reuse browser cases; earlier unchanged core flows have31additional browser cases and19Node contract/context/solver tests. TypeScript, scoped changed-component lint and production builds passed. Deployed checks verified real existing-task retrieval and preserved invalid browser data. An independent subset oracle matched69,120constraint cases across six fixed kits. Tests distinguish mocked responses, fictional kits and actual provider output.
+Six observed YouCam jobs completed on a labelled AI-generated adult portrait, including a November 2 lossless-PNG makeup job: two skin-analysis jobs and two makeup configurations, including the complete three-effect recipe. The most recent render-reuse release passed24planner/recovery/decision/reuse browser cases; earlier unchanged core flows have31additional browser cases and19Node contract/context/solver tests. TypeScript, scoped changed-component lint and production builds passed. Earlier deployed checks verified existing-task retrieval and preserved invalid browser data; they do not verify the current local revision. An independent subset oracle matched69,120constraint cases across six fixed kits. Tests distinguish mocked responses, fictional kits and actual provider output.
 
 ## What remains uncertain
 
@@ -32,9 +32,9 @@ The prototype uses approximate user-entered RGB colors, fixed digital effect set
 
 ## Links and submission status
 
-- Working private entry: https://skinwise-journal.bonnypuppy8192.chatgpt.site/planner
-- Source: complete MIT-licensed source archive prepared; **judge-accessible repository URL not yet supplied**.
-- Primary recorded demo: `outputs/skinwise-planner-demo.mp4`,106.28seconds, actual UI with synthetic portrait / fictional kit / actual completed YouCam output replay labels. **Public video URL not yet supplied**.
-- Screenshots, captions and final access checklist: `outputs/submission/`.
+- Current app: [public planner](https://skinwise-pi.vercel.app/planner). The hosted public preview has paid YouCam API actions disabled.
+- Source: [public MIT-licensed GitHub repository](https://github.com/10toothhtoot01/skinwise).
+- Primary recorded demo: the final 90-second scene-synchronized Skinwise video is distributed in the project package and on the project owner's Desktop; it has not been uploaded to a public video host.
+- Screenshots: actual browser captures are stored in the project owner's Desktop `Project Media` folder and are not included in this public source repository.
 
 This is prepared submission text, not a claim that a Devpost entry, public upload, judge access, eligibility or final submission has been completed. The current [official rules](https://youcam-api-skin-ai-ecommerce.devpost.com/rules) must govern final entry.

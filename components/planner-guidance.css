@@ -1,43 +1,39 @@
 .planner-guidance {
-  border-top:1px solid var(--studio-line,#dbe3d8);
-  padding:40px 0 24px;
-  max-width:920px;
-  overflow-wrap:anywhere;
+  max-width: 100%;
+  margin-top: 38px;
+  padding: 34px 0 8px;
+  border-top: 1px solid var(--studio-line, #d8dfd2);
+  overflow-wrap: anywhere;
 }
-.planner-guidance>label {max-width:720px;}
-.planner-guidance>select {max-width:720px;}
+.planner-guidance > p { max-width: 74ch; color: var(--studio-muted, #526357); font-size: 14px; }
+.planner-guidance > label, .planner-guidance > select { max-width: 760px; }
 .planner-guidance details {
-  border:1px solid #dcd7e8;
-  border-radius:10px;
-  background:#f3f0f8;
-  padding:6px 20px;
-  margin:18px 0;
+  max-width: 900px;
+  margin: 18px 0;
+  padding: 3px 22px;
+  border: 1px solid var(--studio-line, #d8dfd2);
+  border-radius: 12px;
+  background: #fff;
 }
-.planner-guidance summary {
-  cursor:pointer;
-  font-size:13px;
-  font-weight:600;
-  min-height:44px;
-  display:list-item;
-  padding:12px 0;
-}
-.planner-guidance a {
-  color:#4b4263;
-  text-decoration:underline;
-  text-underline-offset:4px;
-}
-.planner-guidance li {margin:16px 0;font-size:12px;line-height:1.8;}
-.planner-guidance select {white-space:normal;}
+.planner-guidance details p { color: var(--studio-muted, #526357); font-size: 13px; }
+.planner-guidance summary { display: list-item; min-height: 44px; padding: 13px 0; font-size: 13px; font-weight: 650; cursor: pointer; }
+.planner-guidance a { color: var(--studio-ink, #1f4438); text-decoration: underline; text-underline-offset: 4px; }
+.planner-guidance li { margin: 18px 0; font-size: 14px; line-height: 1.8; }
+.planner-guidance select { white-space: normal; }
 .planner-guidance [aria-live] {
-  border-left:3px solid #93aa84;
-  background:#edf3e9;
-  padding:12px 17px;
-  margin:20px 0;
-  border-radius:0 8px 8px 0;
+  max-width: 900px;
+  margin: 22px 0;
+  padding: 16px 20px;
+  border: 1px solid #d1debf;
+  border-radius: 10px;
+  color: #3a5330;
+  background: var(--studio-sage, #edf2e7);
+  font-size: 13px;
 }
-.planner-guidance [aria-live] p {margin:0;}
-@media (max-width:680px) {
-  .planner-guidance {padding-top:30px;}
-  .planner-guidance details {padding:6px 15px;}
-  .planner-guidance ul {padding-left:17px;}
+.planner-guidance [aria-live] p { margin: 0; }
+@media (max-width: 560px) {
+  .planner-guidance { margin-top: 30px; padding-top: 29px; }
+  .planner-guidance details { padding-inline: 17px; }
+  .planner-guidance ul { padding-left: 18px; }
+  .planner-guidance > label:has(input[type=checkbox]) { min-height: 44px; }
 }

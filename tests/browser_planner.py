@@ -29,6 +29,7 @@ class PlannerAcceptance(unittest.TestCase):
    self.calls.append(route.request.method)
    if route.request.method=='POST':route.fulfill(status=202,json={'status':'running','taskId':'mock-planner-task','token':TOKEN,'units':1})
    else:route.fulfill(json={'status':'success','url':AWS})
+  self.page.route('**/api/status',lambda route:route.fulfill(json={'configured':True}))
   self.page.route('**/api/makeup*',api)
   self.page.route('https://planner-fixtures.s3.amazonaws.com/**',lambda r:r.fulfill(status=403 if self.expired else 200,content_type='image/png',body=b'expired' if self.expired else png(32,32)))
   # Block any direct provider call even if an implementation regression introduces one.

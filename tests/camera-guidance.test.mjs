@@ -1,0 +1,12 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import vm from 'node:vm';
+const scope={};vm.runInNewContext(fs.readFileSync(new URL('../public/camera/face-guidance.js',import.meta.url),'utf8'),scope);
+const assess=scope.SkinwiseFaceGuidance.assess;
+const face={boundingBox:{originX:150,originY:130,width:320,height:350},categories:[{score:.95}],keypoints:[{x:.35,y:.35},{x:.65,y:.35},{x:.5,y:.5}]};
+const pixels=(fn)=>{const a=new Uint8ClampedArray(64*64*4);for(let y=0;y<64;y++)for(let x=0;x<64;x++){const i=(y*64+x)*4;const v=fn(x,y);a[i]=a[i+1]=a[i+2]=v;a[i+3]=255;}return a;};
+test('no or multiple faces are specific advisories, no quality percentage',()=>{assert.equal(assess([],640,640).faceCount,0);assert.match(assess([face,face],640,640).warnings[0],/More than one/);assert.equal('accuracy' in assess([face],640,640),false);});
+test('small cut-off uncertain face and motion are distinguished',()=>{const f={...face,boundingBox:{originX:0,originY:0,width:80,height:80},categories:[{score:.55}]};const warnings=assess([f],640,640,null,{x:.5,y:.5}).warnings.join(' ');for(const phrase of ['uncertain','too small','cut off','center','changed'])assert.ok(warnings.includes(phrase));});
+test('face-region texture heuristic distinguishes controlled smooth and edged pixels',()=>{const soft=assess([face],640,640,pixels(()=>128));const edged=assess([face],640,640,pixels((x,y)=>(x+y)%2?200:50));assert.equal(soft.metrics.edgeVariance,0);assert.ok(edged.metrics.edgeVariance>soft.metrics.edgeVariance);assert.match(soft.warnings.join(' '),/may be soft/);});
+test('clipped and uneven face-region exposures warn without certifying clean input',()=>{assert.match(assess([face],640,640,pixels(()=>0)).warnings.join(' '),/very dark/);assert.match(assess([face],640,640,pixels(()=>255)).warnings.join(' '),/clipped/);assert.match(assess([face],640,640,pixels(x=>x<32?40:210)).warnings.join(' '),/uneven/);assert.equal('passed' in assess([face],640,640,pixels(()=>128)),false);});

@@ -1,0 +1,45 @@
+{
+  "package": "@mediapipe/tasks-vision",
+  "version": "0.10.32",
+  "license": "Apache-2.0",
+  "modelVersion": "float16/1",
+  "modelSource": "https://storage.googleapis.com/mediapipe-models/face_detector/blaze_face_short_range/float16/1/blaze_face_short_range.tflite",
+  "modelLicenseEvidence": "https://storage.googleapis.com/mediapipe-assets/MediaPipe%20BlazeFace%20Model%20Card%20(Short%20Range).pdf",
+  "files": [
+    {
+      "file": "LICENSE",
+      "bytes": 12331,
+      "sha256": "8707eef0533987efc5b155d64761eeb6e20793f50b9bd1a68dad1cf4719d0ed8"
+    },
+    {
+      "file": "blaze_face_short_range.tflite",
+      "bytes": 229746,
+      "sha256": "b4578f35940bf5a1a655214a1cce5cab13eba73c1297cd78e1a04c2380b0152f"
+    },
+    {
+      "file": "vision_bundle.js",
+      "bytes": 137315,
+      "sha256": "43c65a77825c5d5af7456d4781a64cd15cb3e53f479ff1f923c12b5adecf2b44"
+    },
+    {
+      "file": "vision_wasm_internal.js",
+      "bytes": 204816,
+      "sha256": "6f6b86509cf9e163ea1cfec7edc8cf53732699c04781e4c21c557c1ba402310e"
+    },
+    {
+      "file": "vision_wasm_internal.wasm",
+      "bytes": 11453626,
+      "sha256": "cb3ec20026a9aecc2a81a93c25630ceb5389297ddb7a5f0bd61dd09cde606b9b"
+    },
+    {
+      "file": "vision_wasm_nosimd_internal.js",
+      "bytes": 204669,
+      "sha256": "9f8fc960e363f0fb2f42f7937b97ae9cf9a5630490f71031fa90caa9bb121938"
+    },
+    {
+      "file": "vision_wasm_nosimd_internal.wasm",
+      "bytes": 10647962,
+      "sha256": "924274fcd5ac8985f6570a8573e7971b7bd2d580ba1b8f3beb0ba8f95db6347c"
+    }
+  ]
+}

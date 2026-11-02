@@ -27,3 +27,15 @@ test('matching self reported setup returns no setup mismatch; dimensions not inv
   assert.equal(comparisonLimit(setup({setupLabel:'  PHONE BY WINDOW '}),setup()),null);
   assert.equal(comparisonLimit(setup(),setup({width:480,height:640})),null);
 });
+
+const preparation = {originalWidth:6000,originalHeight:4000,inputBytes:123456,outputBytes:45678,inputType:'image/jpeg',outputType:'image/png',resized:true,orientationNormalized:false,crop:null,encoding:'lossless-png'};
+test('changed or missing preparation warns before interpreting a score difference',()=>{
+  const first=setup({width:4096,height:2731,preparation});
+  assert.match(comparisonLimit(first,setup()),/Photo preparation or framing differs/);
+  assert.match(comparisonLimit(first,setup({width:4096,height:2731,preparation:{...preparation,crop:{left:0,top:0,width:4000,height:4000}}})),/Photo preparation or framing differs/);
+  assert.match(comparisonLimit(first,setup({width:4096,height:2731,preparation:{...preparation,encoding:'jpeg-0.95'}})),/Photo preparation or framing differs/);
+});
+test('encoding byte count alone does not invent a changed capture setup',()=>{
+ const first=setup({width:4096,height:2731,preparation});
+ assert.equal(comparisonLimit(first,setup({width:4096,height:2731,preparation:{...preparation,inputBytes:222222,outputBytes:777777}})),null);
+});

@@ -1,8 +1,12 @@
 # Skinwise — Own-kit Look Lab
 
+**Live demo:** [skinwise-pi.vercel.app/planner](https://skinwise-pi.vercel.app/planner) · **Source:** [github.com/10toothhtoot01/skinwise](https://github.com/10toothhtoot01/skinwise)
+
+The public preview is available for browsing; YouCam-backed paid API actions are disabled on the public deployment. The repo contains no user portrait screenshots or API credentials.
+
 The primary product is an experimental owned-kit makeup planner at `/planner`: enter products you already own, specify time/product/required/excluded constraints, inspect feasible combinations and optional actual YouCam previews, then keep your own decision. The software supplies the constraint solver, conflict explanations, varied shortlist, preference graph and recovery/decision trail. See [planner scope and proof](docs/OWN-KIT-PLANNER.md).
 
-The supporting workspace at `/` inspects actual YouCam skin detection images and returned regions, with a journal for personal context. Skin scores do not select makeup, establish health or prove product effectiveness. See [skin API usefulness](docs/API-USEFULNESS.md).
+The supporting workspace at `/journal` inspects actual YouCam skin detection images and returned regions, with a journal for personal context. Skin scores do not select makeup, establish health or prove product effectiveness. See [skin API usefulness](docs/API-USEFULNESS.md).
 
 ## Run locally
 
@@ -11,19 +15,20 @@ Requires Node.js 22.13+ and npm. From this directory:
 ```bash
 npm ci
 npm run dev
+# Or, after npm run build: npm run start -- --port 5180
 ```
 
-Open `/planner` on the Local URL printed by the server (normally http://127.0.0.1:5173/planner). The solver and clearly fictional kit walkthrough need no API key or units. A real optional makeup preview needs a server key with active units and costs1unit per explicit start according to the consulted reference. The separate skin workspace at `/` costs12units inHD or9units inSD for its four-concern visible profile. `GET /api/status` only checks whether a key is configured, not whether it has credits.
+Open `/planner` on the Local URL printed by the server (normally http://127.0.0.1:5173/planner). The solver and clearly fictional kit walkthrough need no API key or units. A real optional makeup preview needs a server key with active units and costs1unit per explicit start according to the consulted reference. The separate skin workspace at `/journal` costs12units inHD or9units inSD for its four-concern visible profile. `GET /api/status` only checks whether a key is configured, not whether it has credits.
 
 To enable actual provider previews or skin analysis, copy `.dev.vars.example` to `.dev.vars`, replace the placeholder with your server-only YouCam key, and restart the server. Free planning needs no environment file. Never commit the real key.
 
-The supplied key was configured locally for this build in ignored `.dev.vars` and as a secret on the private Sites deployment. It is not included in source or a downloadable source archive. Other developers supply their own key.
+The configured key stays in the ignored local `.dev.vars` file and is not included in source archives. The deployed public preview has YouCam-backed paid API actions disabled; use the local setup above to configure your own server-side key.
 
 ## Accuracy and capture reliability
 
 Skinwise has not established clinical accuracy, measurement repeatability on users’ devices, or a reliable-change threshold for the implemented API configurations. Scores are provider UI estimates, not physical hydration measurements, confidence probabilities, or product-effectiveness findings. Published validation on other configurations does not transfer automatically. See [evidence audit](docs/ACCURACY-EVIDENCE.md) and [promises with proof](docs/PROMISES-AND-PROOF.md).
 
-Optional YouCam guided capture checks face position, angle, lighting and resolution. It is loaded only after a user clicks to open the camera. Upload remains available with explicit unverified visual quality. Local image decode/dimension checks do not establish that a face is in focus. Hardware capture and SDK domain compatibility require real-device testing; SDK mocks cannot prove them. See [capture reliability](docs/CAPTURE-RELIABILITY.md).
+The planner offers an explicit browser camera with optional local face/framing/pose and image-signal hints, as well as native capture and upload. These hints are uncalibrated and advisory. An optional crop is drawn directly from the original, with compact JPEG or lossless PNG output; it cannot restore missing detail. See [camera details](docs/BROWSER-CAMERA.md) and [image preparation](docs/IMAGE-PREPARATION.md). The separate skin journal offers optional YouCam guided capture for position, angle, lighting and resolution. It is loaded only after a user clicks to open the camera. Upload remains available with explicit unverified visual quality. Local image decode/dimension checks do not establish that a face is in focus. Hardware capture and SDK domain compatibility require real-device testing; SDK mocks cannot prove them. See [capture reliability](docs/CAPTURE-RELIABILITY.md).
 
 ## What to try
 
@@ -32,9 +37,10 @@ Optional YouCam guided capture checks face position, angle, lighting and resolut
 3. Open the catalog of every feasible combination. Choose one without a preview, or choose no added makeup, and export the exact plan for free. The export records the basis of your decision.
 4. For an optional visual preview, open any combination’s preview card. This makes no API request. To render, clear the fictional session, enter your owned products, prepare a permitted adult portrait and explicitly consent to processing/cost. All options start from the same prepared original.
 5. Inspect actual output for artifacts, compare available options, record a preference/tie/rejection and choose a plan explicitly. Digital colors and time estimates are not physical guarantees.
-6. Keep private task-recovery files separate from ordinary shareable plan exports. Check an existing task with GET rather than start another paid job. Recovery does not extend receipt expiry. Changing limits or product labels reuses a task when the same portrait and exact digital settings match; it does not spend another unit merely because the decision context changed.
+6. Save a chosen look locally for later, or export it as text. Reuse is free and restores a constraints-based plan; photos and preview receipts are not stored in the library.
+7. Keep private task-recovery files separate from ordinary shareable plan exports. Check an existing task with GET rather than start another paid job. Recovery does not extend receipt expiry. Changing limits or product labels reuses a task when the same portrait and exact digital settings match; it does not spend another unit merely because the decision context changed.
 
-The supporting `/` skin workspace has its own labelled sample, optional guided capture, real detection images and journal. It preserves source/capture context and describes score differences without a product-effectiveness verdict. It does not supply makeup recommendations.
+The supporting `/journal` skin workspace has its own labelled sample, optional guided capture, real detection images and journal. It preserves source/capture context and describes score differences without a product-effectiveness verdict. It does not supply makeup recommendations.
 
 ## Data and limits
 
@@ -66,14 +72,14 @@ python -m venv .venv
 python -m pip install -r tests/requirements.txt
 python -m playwright install chromium
 # Start npm run dev in another terminal before running the suite.
-PYTHONPATH=tests python -m unittest -v browser_planner browser_planner_recovery browser_planner_decision browser_planner_reuse
+PYTHONPATH=tests python -m unittest -v browser_planner browser_planner_recovery browser_planner_decision browser_planner_reuse browser_planner_expiry browser_planner_saved_looks browser_portrait_framing browser_camera_local browser_camera_model browser_production_navigation
 ```
 
 These tests intercept provider calls and do not spend API units. Planner previews cost1unit per explicit start according to the consulted provider reference; the local solver spends none.
 
 Exact tested commands, browser checks and their limits are recorded in [acceptance evidence](docs/ACCEPTANCE.md). Development browser tests require Python Playwright, Pillow and Chromium. A clean Linux extraction was verified with Node22.23.1/npm10.9.8/Python3.14; this is not a claim of every operating system or Python version.
 
-See [build decisions](docs/BUILD-DECISIONS.md), [submission draft](docs/SUBMISSION-DRAFT.md), and [demo recording script](docs/DEMO-SCRIPT.md). The repository is MIT licensed; included starter/vendor assets retain their license notices. Submission still requires a judge-accessible repository, screenshots and a publicly visible 1–3 minute video.
+See [build decisions](docs/BUILD-DECISIONS.md), [submission draft](docs/SUBMISSION-DRAFT.md), and [demo recording script](docs/DEMO-SCRIPT.md). The repository is MIT licensed; included starter/vendor assets retain their license notices. The final demo video and Project Media screenshots are distributed separately from this source repository.
 
 ## Skill gate and improvement
 

@@ -10,7 +10,7 @@ import browser_acceptance as base
 from browser_capture import png
 
 RECEIPTS='skinwise-result-receipts-v1'
-TOKEN='1799999999999.eyJwcm9maWxlIjoidmlzaWJsZSJ9.'+'a'*64
+TOKEN='fixture-token-no-provider-access'
 AWS='https://functional-fixtures.s3.amazonaws.com/'
 
 
@@ -75,6 +75,7 @@ class EvidenceAcceptance(unittest.TestCase):
         image=workspace.get_by_role('img',name='YouCam overlay for Pore appearance, Whole')
         expect(image).to_have_attribute('src',AWS+'one-pore.png')
         expect(image).to_have_js_property('naturalWidth',32)
+        expect(workspace.get_by_role('link',name='Open YouCam overlay for Pore appearance, Whole full size')).to_have_attribute('href',AWS+'one-pore.png')
         workspace.get_by_role('group',name='Returned facial regions').get_by_role('button',name=re.compile('^Left cheek')).click()
         expect(workspace.get_by_role('img',name='YouCam overlay for Pore appearance, Left cheek')).to_have_attribute('src',AWS+'one-cheek.png')
         expect(workspace.get_by_text('Left cheek Pore appearance: 58/100',exact=True)).to_be_visible()
@@ -93,7 +94,7 @@ class EvidenceAcceptance(unittest.TestCase):
         self.assertEqual(TOKEN,self.page.evaluate('(key)=>JSON.parse(localStorage.getItem(key))["evidence-task"].token',RECEIPTS))
         self.page.reload();self.page.wait_for_load_state('networkidle');workspace=self.inspect()
         expect(workspace.get_by_role('button',name='Refresh detection images')).to_be_enabled()
-        expect(workspace.get_by_text('The provider input image is not loaded.')).to_be_visible()
+        expect(workspace.get_by_role('img',name='Provider-returned input image used for this scan')).to_be_visible()
         self.assertEqual(1,len(submitted))
         self.assert_clean()
 
@@ -102,15 +103,12 @@ class EvidenceAcceptance(unittest.TestCase):
         self.page.route('**/api/analyze*',lambda route:(calls.append(route.request.method),route.fulfill(json={'status':'success','result':result(),'visuals':visuals('refreshed')})))
         self.seed([result()],{'evidence-task':{'taskId':'evidence-task','token':TOKEN}})
         workspace=self.inspect()
-        expect(workspace.get_by_text('The provider input image is not loaded.')).to_be_visible()
-        self.assertEqual([],calls)
-        workspace.get_by_role('button',name='Refresh detection images').click()
         expect(workspace.get_by_role('img',name='YouCam overlay for Pore appearance, Whole')).to_have_attribute('src',AWS+'refreshed-pore.png')
         self.assertEqual(['GET'],calls)
         self.page.reload();self.page.wait_for_load_state('networkidle');workspace=self.inspect()
-        expect(workspace.get_by_text('The provider input image is not loaded.')).to_be_visible()
+        expect(workspace.get_by_role('img',name='YouCam overlay for Pore appearance, Whole')).to_be_visible()
         expect(workspace.get_by_role('button',name='Refresh detection images')).to_be_enabled()
-        self.assertEqual(['GET'],calls)
+        self.assertEqual(['GET','GET'],calls)
         self.assert_private_export(self.stored());self.assert_clean()
 
     def test_image_only_region_remains_inspectable_without_invented_score(self):
@@ -123,7 +121,6 @@ class EvidenceAcceptance(unittest.TestCase):
         self.page.route('**/api/analyze*',lambda route:route.fulfill(json={'status':'success','result':scan,'visuals':images}))
         self.seed([scan],{'evidence-task':{'taskId':'evidence-task','token':TOKEN}})
         workspace=self.inspect()
-        workspace.get_by_role('button',name='Refresh detection images').click()
         expect(workspace.get_by_role('img',name='YouCam overlay for Pore appearance, Whole')).to_have_attribute('src',AWS+'one-pore.png')
         group=workspace.get_by_role('group',name='Returned facial regions')
         group.get_by_role('button',name=re.compile('^Left cheek')).click()
@@ -144,13 +141,20 @@ class EvidenceAcceptance(unittest.TestCase):
             else:route.fulfill(status=403,json={'error':'This completed task receipt has expired. No new analysis was started.','code':'INVALID_TASK'})
         self.page.route('**/api/analyze*',handle)
         self.seed([result()],{'evidence-task':{'taskId':'evidence-task','token':TOKEN}});workspace=self.inspect()
-        workspace.get_by_role('button',name='Refresh detection images').click()
         expect(workspace.get_by_text('This temporary image could not load.',exact=False).first).to_be_visible()
         expect(workspace.get_by_role('img')).to_have_count(0)
         workspace.get_by_role('button',name='Refresh detection images').click()
         expect(workspace.get_by_role('status')).to_contain_text('receipt has expired')
         expect(workspace.get_by_text('Whole Pore appearance: 64/100',exact=True)).to_be_visible()
         self.assertEqual(['GET','GET'],calls);self.assert_private_export(self.stored());self.assert_clean()
+
+    def test_auto_restored_regional_only_image_is_shown(self):
+        self.mock_images();images=visuals();images['items']=[item for item in images['items'] if item['region']=='left_cheek']
+        self.page.route('**/api/analyze*',lambda route:route.fulfill(json={'status':'success','result':result(),'visuals':images}))
+        self.seed([result()],{'evidence-task':{'taskId':'evidence-task','token':TOKEN}})
+        workspace=self.inspect()
+        expect(workspace.get_by_role('img',name='YouCam overlay for Pore appearance, Left cheek')).to_be_visible()
+        self.assertEqual(1,len(self.analysis_requests));self.assert_clean()
 
     def test_historical_scan_review_persists_and_exports_without_private_state(self):
         self.seed([result('old-task',44),result('new-task',88)],{'old-task':{'taskId':'old-task','token':TOKEN}})
@@ -173,8 +177,8 @@ class EvidenceAcceptance(unittest.TestCase):
     def test_delete_clears_receipts_and_ignores_late_image_refresh(self):
         held=[];self.mock_images()
         self.page.route('**/api/analyze*',lambda route:held.append(route))
-        self.seed([result()],{'evidence-task':{'taskId':'evidence-task','token':TOKEN}});workspace=self.inspect()
-        with self.page.expect_request(lambda req:'/api/analyze?' in req.url):workspace.get_by_role('button',name='Refresh detection images').click()
+        self.seed([result()],{'evidence-task':{'taskId':'evidence-task','token':TOKEN}})
+        with self.page.expect_request(lambda req:'/api/analyze?' in req.url):workspace=self.inspect()
         self.page.wait_for_timeout(50);self.assertEqual(1,len(held))
         self.click_nav('My journal');self.page.get_by_role('button',name='Delete all data',exact=True).click()
         self.page.get_by_role('alertdialog').get_by_role('button',name='Delete all data',exact=True).click()

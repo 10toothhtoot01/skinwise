@@ -71,15 +71,15 @@ class CaptureAcceptance(unittest.TestCase):
         expect(self.page.locator('.photo-preflight')).to_contain_text('have not been verified')
         self.assertEqual([], self.analysis_requests)
         self.page.get_by_role('button',name='Remove selected photo').click()
-        self.upload(png(4097,480))
-        expect(self.page.locator('.notice[role=status]')).to_contain_text('larger than 4096 pixels')
+        self.upload(png(6000,600))
+        expect(self.page.locator('.notice[role=status]')).to_contain_text('needs framing before it fits')
         self.assert_no_guided_photo()
 
     def test_decode_size_and_mime_fail_closed(self):
         self.capture_page()
         for content, mime, message in [(b'not-an-image','image/png','could not be decoded'),
-            (png()+b'\0'*(8*1024*1024),'image/png','smaller than 8 MB'),
-            (png(),'image/webp','JPEG or PNG')]:
+            (png()+b'\0'*(25*1024*1024),'image/png','over 25 MB'),
+            (png(),'application/pdf','Choose a still JPEG')]:
             self.upload(content,mime)
             expect(self.page.locator('.notice[role=status]')).to_contain_text(message)
             self.assert_no_guided_photo()
@@ -182,7 +182,9 @@ class CaptureAcceptance(unittest.TestCase):
         self.page.get_by_role('button',name='Resume checking this analysis').click()
         expect(self.page.get_by_text('Live YouCam analysis',exact=False)).to_be_visible(timeout=15000)
         self.assertEqual(context(),self.stored()['analyses'][0]['capture'])
-        self.assertEqual({'post':1,'get':1},calls)
+        # Missing session-only images are restored by a GET; never resubmit the paid job.
+        self.page.wait_for_load_state('networkidle')
+        self.assertEqual({'post':1,'get':2},calls)
         self.click_nav('My journal')
         with self.page.expect_download() as event:self.page.get_by_role('button',name='Export journal').click()
         exported=json.loads(base.Path(event.value.path()).read_text())

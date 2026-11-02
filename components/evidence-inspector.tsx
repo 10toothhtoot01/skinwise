@@ -1,16 +1,22 @@
 'use client';
-import {useState} from 'react';
+import {useEffect,useRef,useState} from 'react';
 import {focusOptions,type Focus,type Visuals,type EvidenceReview} from '@/lib/evidence';
 type Region={key:string;label:string;region:string;score:number};
 type Props={id:string;source:'demo'|'youcam';metrics:{key:string;label:string;score:number}[];regions?:Region[];visuals?:Visuals;focus:Focus;onFocus:(focus:Focus)=>void;review?:EvidenceReview;onReview:(review:EvidenceReview)=>void;canRefresh:boolean;refreshing:boolean;onRefresh:()=>void;error?:string};
 const regionName=(value:string)=>value.replaceAll('_',' ').replace(/^./,s=>s.toUpperCase());
 export function EvidenceInspector({source,metrics,regions=[],visuals,focus,onFocus,review,onReview,canRefresh,refreshing,onRefresh,error}:Props){
   const [zoom,setZoom]=useState(1);
-  const [region,setRegion]=useState(review?.focus===focus?(review.region||'whole'):'whole');
+  const [region,setRegion]=useState(()=>{
+    if(review?.focus===focus) return review.region||'whole';
+    const images=visuals?.items.filter(item=>item.key===focus)||[];
+    return images.some(item=>item.region==='whole')?'whole':images[0]?.region||'whole';
+  });
   const [note,setNote]=useState(review?.focus===focus?review.note:'');
-  function selectRegion(value:string){setRegion(value);setNote(review?.focus===focus&&(review.region||'whole')===value?review.note:'');}
+  const regionChosen=useRef(false);
+  function selectRegion(value:string){regionChosen.current=true;setRegion(value);setNote(review?.focus===focus&&(review.region||'whole')===value?review.note:'');}
   const entries=regions.filter(r=>r.key===focus);
   const image=visuals?.items.find(v=>v.key===focus&&v.region===region);
+  useEffect(()=>{if(regionChosen.current||review?.focus===focus)return;const images=visuals?.items.filter(item=>item.key===focus)||[];if(images.length&&!images.some(item=>item.region==='whole'))setRegion(images[0].region);},[visuals,focus,review]);
   const focused=metrics.find(m=>m.key===focus || focus==='pore'&&m.key==='pores');
   // Images and scores are independent provider outputs; either can make a region inspectable.
   const returnedRegions=[...new Set([
@@ -36,7 +42,7 @@ export function EvidenceInspector({source,metrics,regions=[],visuals,focus,onFoc
   </section>;
 }
 
-function ImageTile({url,zoom,alt,empty}:{url?:string;zoom:number;alt:string;empty:string}){const[failed,setFailed]=useState(false);return <div className="evidence-image-window" tabIndex={0} role="region" aria-label={`Scrollable ${alt}`}>{url&&!failed?
-// Provider images are temporary signed originals; avoid transforming or caching them through an optimizer.
-// eslint-disable-next-line @next/next/no-img-element
-<img width="600" height="600" src={url} style={{width:`${zoom*100}%`,maxWidth:"none",height:`${zoom*350}px`}} referrerPolicy="no-referrer" alt={alt} onError={()=>setFailed(true)}/>:<div className="image-empty">{failed?'This temporary image could not load. Refresh images from the existing task.':empty}</div>}</div>;}
+function ImageTile({url,zoom,alt,empty}:{url?:string;zoom:number;alt:string;empty:string}){const[failed,setFailed]=useState(false);const[loaded,setLoaded]=useState(false);return <><div className="evidence-image-window" tabIndex={0} role="region" aria-label={`Scrollable ${alt}`}>{url&&!failed?<>
+{/* Provider images are temporary signed originals; avoid transforming or caching them through an optimizer. */}
+{/* eslint-disable-next-line @next/next/no-img-element */}
+<img width="600" height="600" src={url} style={{width:`${zoom*100}%`,maxWidth:"none",height:`${zoom*350}px`}} referrerPolicy="no-referrer" alt={alt} onLoad={()=>setLoaded(true)} onError={()=>setFailed(true)}/>{!loaded&&<div className="evidence-loading" role="status">Loading image from YouCam…</div>}</>:<div className="image-empty">{failed?'This temporary image could not load. Refresh images from the existing task.':empty}</div>}</div>{url&&!failed&&<a className="evidence-open" href={url} target="_blank" rel="noopener noreferrer" referrerPolicy="no-referrer" aria-label={`Open ${alt} full size`}>Open full-size image ↗</a>}</>;}

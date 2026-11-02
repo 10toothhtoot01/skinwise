@@ -53,3 +53,4 @@ __pycache__/
 *.pyc
 /test-results/
 .pytest_cache/
+.vercel
